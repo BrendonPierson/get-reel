@@ -36,4 +36,33 @@ requirejs(
     });
   });
   
-});
+// On clicking "Spin the Reel":
+$('#movie-search').click(function () {
+
+    // Capture user input
+    var titleInput = $('#title-input').val();
+    var yearInput = $('#year-input').val(); 
+
+    // Run ajax call to get data
+    $.ajax({
+        url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
+    }).done(function (data) {
+        console.log(data);
+        // // display data in thumbnail format, prompting the user to "Add" or "Cancel" to confirm the addition
+        // //Parse JSON into javascript object
+        // var movieResult = JSON.parse(data);
+        // //
+        
+        myFirebaseRef.set({movies: {data}});
+
+        });
+
+        });
+
+
+
+    });
+
+
+
+
