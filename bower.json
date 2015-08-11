@@ -1,7 +1,9 @@
 {
-  "name": "get-reel",
+  "name": "bower install jquery --save",
   "version": "0.0.0",
-  "homepage": "https://github.com/tombler/get-reel",
+  "authors": [
+    "Dan-Hodges <dhdgs690@gmail.com>"
+  ],
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -11,6 +13,11 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4"
+    "requirejs": "~2.1.20",
+    "bootstrap": "~3.3.5",
+    "require-handlebars-plugin": "~0.11.3",
+    "firebase": "~2.2.9",
+    "lodash": "~3.10.1",
+    "handlebars": "~3.0.3"
   }
 }

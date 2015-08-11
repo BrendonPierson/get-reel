@@ -19,4 +19,13 @@ requirejs.config({
 requirejs(
   ["firebase", "jquery","lodash", "hbs", "bootstrap"],
   function(_firebase, $, _, Handlebars, bootstrap) {
+  var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
+  
+    myFirebaseRef.child("movies").on("value", function(snapshot) {
+    allMovieObject = snapshot.val();
+    console.log('allMovieObject :', allMovieObject);
+    });
+
+
+
 });
