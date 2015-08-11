@@ -21,15 +21,16 @@ requirejs(
   function(_firebase, $, _, Handlebars, bootstrap) {
   var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
-  myFirebaseRef.child("movies").on("value", function(snapshot) {
-    var allMoviesObject = snapshot.val();
+  myFirebaseRef.on("value", function(snapshot) {
+    // console.log(snapshot.val());
+    var allMovies = snapshot.val();
     var allMoviesArray = [];
-    console.log('allMoviesObject :', allMoviesObject); 
-
      // Convert Firebase's object of objects into an array of objects
-    for (var key in allMoviesObject) {
-      allMoviesArray[allMoviesArray.length] = allMoviesObject[key];
+    for (var key in allMovies) {
+      allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
+    var allMoviesObject = {movies: allMoviesArray};
+    // console.log(allMoviesObject);
 
     require(['hbs!../templates/movies'], function(template) {
       $(".row").html(template(allMoviesArray));
@@ -53,7 +54,7 @@ $('#movie-search').click(function () {
         // var movieResult = JSON.parse(data);
         // //
         
-        myFirebaseRef.set({movies: {data}});
+        myFirebaseRef.push(data);
 
         });
 
