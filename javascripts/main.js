@@ -36,10 +36,9 @@ requirejs(
       $(".row").html(template(allMoviesArray));
     });
   });
-  
-// On clicking "Spin the Reel":
-$('#movie-search').click(function () {
 
+  // On clicking "Spin the Reel":
+  $('#movie-search').click(function () {
     // Capture user input
     var titleInput = $('#title-input').val();
     var yearInput = $('#year-input').val(); 
@@ -55,14 +54,12 @@ $('#movie-search').click(function () {
         // //
         
         myFirebaseRef.push(data);
-
-        });
-
-        });
-
-
-
     });
+  });
+  
+});
+
+
 
 
 
