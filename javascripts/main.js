@@ -22,14 +22,18 @@ requirejs(
   var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
   myFirebaseRef.child("movies").on("value", function(snapshot) {
-    var allMovieObject = snapshot.val();
-    console.log('allMovieObject :', allMovieObject);
+    var allMoviesObject = snapshot.val();
+    var allMoviesArray = [];
+    console.log('allMoviesObject :', allMoviesObject); 
+
+     // Convert Firebase's object of objects into an array of objects
+    for (var key in allMoviesObject) {
+      allMoviesArray[allMoviesArray.length] = allMoviesObject[key];
+    }
 
     require(['hbs!../templates/movies'], function(template) {
-      console.log("allMovieObject line 29 :", allMovieObject);
-      $("#row").html(template(allMovieObject));
+      $(".row").html(template(allMoviesArray));
     });
-
   });
   
 });
