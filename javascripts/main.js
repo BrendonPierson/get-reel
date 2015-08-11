@@ -22,24 +22,21 @@ requirejs(
   var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
   myFirebaseRef.on("value", function(snapshot) {
-    // console.log(snapshot.val());
     var allMovies = snapshot.val();
     var allMoviesArray = [];
-     // Convert Firebase's object of objects into an array of objects
     for (var key in allMovies) {
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
     var allMoviesObject = {movies: allMoviesArray};
-    // console.log(allMoviesObject);
 
     require(['hbs!../templates/movies'], function(template) {
       $(".row").html(template(allMoviesArray));
     });
+
   });
   
-// On clicking "Spin the Reel":
-$('#movie-search').click(function () {
-
+  // On clicking "Spin the Reel":
+  $('#movie-search').click(function () {
     // Capture user input
     var titleInput = $('#title-input').val();
     var yearInput = $('#year-input').val(); 
@@ -53,16 +50,11 @@ $('#movie-search').click(function () {
         // //Parse JSON into javascript object
         // var movieResult = JSON.parse(data);
         // //
-        
-        myFirebaseRef.push(data);
-
-        });
-
-        });
-
-
-
+      myFirebaseRef.push(data);
     });
+  });
+
+});
 
 
 
