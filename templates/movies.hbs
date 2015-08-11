@@ -1,0 +1,16 @@
+{{#each movies}}
+   <div class='col-xs-4 row-centered movie'>
+       <a href='#'>
+           <div class='thumbnail'>
+{{!--                <img src='{{Poster}}' alt='{{Title}}'> --}}
+               <div class='caption'>
+                   <h3 id="movieName">{{Title}}</h3>
+                   <p id="hbsArtist">{{Year}}</p>
+                   <p id="hbsAlbum">{{Actors}}</p>
+                   <p id="hbsAlbum">Watched</p>
+               </div>
+               <button class='delete col-centered'>Delete</button>
+           </div>
+       </a>
+   </div>
+{{/each}}

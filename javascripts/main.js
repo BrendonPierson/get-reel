@@ -20,12 +20,16 @@ requirejs(
   ["firebase", "jquery","lodash", "hbs", "bootstrap"],
   function(_firebase, $, _, Handlebars, bootstrap) {
   var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
-  
-    myFirebaseRef.child("movies").on("value", function(snapshot) {
-    allMovieObject = snapshot.val();
+
+  myFirebaseRef.child("movies").on("value", function(snapshot) {
+    var allMovieObject = snapshot.val();
     console.log('allMovieObject :', allMovieObject);
+
+    require(['hbs!../templates/movies'], function(template) {
+      console.log("allMovieObject line 29 :", allMovieObject);
+      $("#row").html(template(allMovieObject));
     });
 
-
-
+  });
+  
 });
