@@ -4,8 +4,10 @@
   <head>
     <meta charset="utf-8">
     <title>Get Reel</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link href='http://fonts.googleapis.com/css?family=Overlock:400,900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+
   </head>
 
   <body>
@@ -14,7 +16,7 @@
       <div class="container">
         <h1>Get REEL</h1>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="add-movie">
           Add Movie
         </button>
       </div>
@@ -24,36 +26,36 @@
     <div class="row" id ="row"> 
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add a Movie. Go Ahead, Do It.</h4>
-            <p>* Indicates required field.</p>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="Title">*Title</label>
-                <input type="text" class="form-control" id="title-input" placeholder="">
-              </div>
-              <div class="form-group">
-                <label for="year">Year</label>
-                <input type="text" class="form-control" id="year-input" placeholder="">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-default">Reset Form</button>
-            <button type="button" class="btn btn-primary" id="movie-search">Spin the Reel</button>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Add a Movie. Go Ahead, Do It.</h4>
+              <p>* Indicates required field.</p>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="Title">*Title</label>
+                  <input type="text" class="form-control" id="title-input" placeholder="">
+                </div>
+                <div class="form-group">
+                  <label for="year">Year</label>
+                  <input type="text" class="form-control" id="year-input" placeholder="">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default">Reset Form</button>
+              <button type="button" class="btn btn-primary" id="movie-search">Spin the Reel</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
 
  

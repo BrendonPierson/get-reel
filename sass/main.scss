@@ -1,1 +1,28 @@
-body {padding-top: 120px;}
+body {
+    padding-top: 150px;
+    background-image: url('http://scrappen.com/images/img7/movie-reel-wallpaper-border-hd-widescreen-11.png');
+}
+
+// .container {
+//   width: 60%;     
+// }
+
+.navbar {
+    
+    // background-image: url('http://www.irishnetworkchina.com/wp-content/uploads/2012/11/movie-reel.jpg');
+    background-color:rgba(255,0,0,0.5);
+}
+
+h1 {
+    display: inline-block;
+    font-family: "Overlock";
+    font-weight: 900;
+    font-size: 50px;
+    text-shadow: 2px 2px #000;
+    color: white;
+}
+
+#add-movie {
+    display: inline-block;
+    text-align: right;
+}
