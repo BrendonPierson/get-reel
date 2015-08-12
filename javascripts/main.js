@@ -17,8 +17,8 @@ requirejs.config({
 });
 
 requirejs(
-  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete"],
-  function(_firebase, $, _, Handlebars, bootstrap, deleter) {
+  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete", "watched", "rating"],
+  function(_firebase, $, _, Handlebars, bootstrap, deleter, watched, rating) {
   var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
   // Declare allMovies for require scope
@@ -33,6 +33,11 @@ requirejs(
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
     var allMoviesObject = {movies: allMoviesArray};
+
+    // If rating >= 1 (i.e. if movie has been rating), show user rating.
+    
+
+    
 
     require(['hbs!../templates/movies'], function(template) {
       $(".row").html(template(allMoviesArray));
@@ -55,6 +60,16 @@ requirejs(
     //automatically deletes element from database if "Movie not Found" //
     var errorKey = _.findKey(allMovies, {'Error': "Movie not found!"}); 
     deleter.delete(errorKey);
+
+    // console.log(allMoviesArray);
+    // Hide select box if movie has been rated.
+     for (i = 0; i < allMoviesArray; i++) {
+      console.log(allMoviesArray[i].rating);
+        // if (allMoviesArray[i].rating >= 1) {
+        //   $('select').hide();
+        // }
+    }
+
 
   }); // End of Firebase snapshot
   
@@ -116,7 +131,20 @@ requirejs(
   $(document).on('click', '.submit-rating', function (e) {
     e.preventDefault();
     // Create submit-rating module to add rating to Firebase (see above click function)
-      
+    var userRating = $(this).siblings('.form-group').children('.rating').children('option:selected').text();
+    // console.log(userRating);
+    var ratedMovie = $(this).parent().siblings('#movieName').text();
+    // console.log(ratedMovie);
+    var allTitles = [];
+    allTitles = _.pluck(allMovies, 'Title');
+     for (var i = 0; i < allTitles.length; i++) {
+       if (allTitles[i] === ratedMovie) {
+         ratingKey = _.findKey(allMovies, {'Title': ratedMovie});
+         // console.log(ratingKey);
+       }
+      }
+      // console.log(ratingKey);
+    rating.submitRating(this, ratingKey, userRating);
   });
 
 
