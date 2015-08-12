@@ -17,22 +17,23 @@ requirejs.config({
 });
 
 requirejs(
-  ["firebase", "jquery","lodash", "hbs", "bootstrap"],
-  function(_firebase, $, _, Handlebars, bootstrap) {
+  ["firebase", "jquery","lodash", "hbs", "bootstrap","delete"],
+  function(_firebase, $, _, Handlebars, bootstrap, deleter) {
   var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
+  
+  allMovies = {}; /// declared outside  myFirebaseRef() to increase scope ///
   myFirebaseRef.on("value", function(snapshot) {
-    var allMovies = snapshot.val();
+    allMovies = snapshot.val();
     var allMoviesArray = [];
     for (var key in allMovies) {
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
-    var allMoviesObject = {movies: allMoviesArray};
+    allMoviesObject = {movies: allMoviesArray};
 
     require(['hbs!../templates/movies'], function(template) {
       $(".row").html(template(allMoviesArray));
     });
-
   });
   
   // On clicking "Spin the Reel":
@@ -54,4 +55,16 @@ requirejs(
     });
   });
 
+  /// database delete function ///
+  $(document).on("click", '#delete', function() {
+    console.log("you clicked delete");
+    var deleteTitle = $(this).siblings().children('h3').html();
+    console.log("deleteTitle :", deleteTitle)
+    var titleKey = '';
+    console.log("allMovies :", allMovies);
+    titleKey = _.findKey(allMovies, {'Title': deleteTitle});
+    console.log("titleKey :", titleKey);
+    deleter.delete(titleKey);
+    $(this).parent().remove();
+  });
 });
