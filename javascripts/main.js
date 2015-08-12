@@ -57,9 +57,16 @@ requirejs(
       $('.myRating').rating();
 
       $('input').on('change', function (e) {
-      // var rate = $(this).rating('rate');
-      console.log($(this).attr('value'));
-  });
+        var userRating = $(this).attr('value');
+      // Capture a variable that gets title/key
+      var ratingTitle = $(this).parent().parent().siblings('h3').html();
+      // console.log(ratingTitle);
+      // console.log("allMovies :", allMovies);
+      var titleKey = _.findKey(allMovies, {'Title': ratingTitle});
+      // console.log(titleKey);
+        var ref = new Firebase('https://get-reel.firebaseio.com/' + titleKey);
+          ref.update({rating: userRating});
+      });
 
       
     });
@@ -88,20 +95,13 @@ requirejs(
     // Hide select box if movie has been rated.
      for (i = 0; i < allMoviesArray; i++) {
       console.log(allMoviesArray[i].rating);
-        // if (allMoviesArray[i].rating >= 1) {
-        //   $('select').hide();
-        // }
     }
 
-
   }); // End of Firebase snapshot
-  
-  // On clicking "Spin the Reel":
-  $('#movie-search').click(function () {
 
-  });
+
   
-// On clicking "Spin the Reel": (consider moving this function to module?)
+  // On clicking "Spin the Reel": (consider moving this function to module?)
   $('#movie-search').click(function () {
       // Close form: (possible modification - on click, hidden div displays with the movie info asking to confirm the selection.)
 
@@ -120,6 +120,8 @@ requirejs(
         });
   });
 
+
+
   /// database delete function ///
   $(document).on("click", '#delete', function() {
     // console.log("you clicked delete");
@@ -129,9 +131,11 @@ requirejs(
     // console.log("allMovies :", allMovies);
     titleKey = _.findKey(allMovies, {'Title': deleteTitle});
     // console.log("titleKey :", titleKey);
-    deleter.delete(titleKey);
+    deleter.delete(titleKey); // Run from delete.js module
     $(this).parent().remove();
   });
+
+
 
   // Watched function
   $(document).on('click', '.watched', function (e) {
@@ -151,31 +155,6 @@ requirejs(
     watched.movieWatched(this, watchedProperty, true);
   });
 
-
-
-  
-
-
-
-
-
-  //   e.preventDefault();
-  //   // Create submit-rating module to add rating to Firebase (see above click function)
-  //   var userRating = $(this).siblings('.form-group').children('.rating').children('option:selected').text();
-  //   // console.log(userRating);
-  //   var ratedMovie = $(this).parent().siblings('#movieName').text();
-  //   // console.log(ratedMovie);
-  //   var allTitles = [];
-  //   allTitles = _.pluck(allMovies, 'Title');
-  //    for (var i = 0; i < allTitles.length; i++) {
-  //      if (allTitles[i] === ratedMovie) {
-  //        ratingKey = _.findKey(allMovies, {'Title': ratedMovie});
-  //        // console.log(ratingKey);
-  //      }
-  //     }
-  //     // console.log(ratingKey);
-  //   rating.submitRating(this, ratingKey, userRating);
-  // });
 
 
 });
