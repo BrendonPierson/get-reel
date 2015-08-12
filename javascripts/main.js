@@ -56,6 +56,11 @@ requirejs(
 
       $('.myRating').rating();
 
+      $('input').on('change', function (e) {
+      // var rate = $(this).rating('rate');
+      console.log($(this).attr('value'));
+  });
+
       
     });
 
@@ -148,10 +153,7 @@ requirejs(
 
 
 
-  $('input').on('change', function (e) {
-      var rate = $(this).rating('rate');
-      console.log(rate);
-  });
+  
 
 
 
