@@ -63,26 +63,23 @@ requirejs(
 
   });
   
-  // On clicking "Spin the Reel":
+// On clicking "Spin the Reel": (consider moving this function to module?)
   $('#movie-search').click(function () {
-    // Capture user input
-    var titleInput = $('#title-input').val();
-    var yearInput = $('#year-input').val(); 
+      // Close form: (possible modification - on click, hidden div displays with the movie info asking to confirm the selection.)
 
-    // Run ajax call to get data
-    $.ajax({
-        url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
-    }).done(function (data) {
-        console.log(data);
-        // // display data in thumbnail format, prompting the user to "Add" or "Cancel" to confirm the addition
-        // //Parse JSON into javascript object
-        // var movieResult = JSON.parse(data);
-        // //
-        
-        myFirebaseRef.push(data);
+      // Capture user input
+      var titleInput = $('#title-input').val();
+      var yearInput = $('#year-input').val(); 
 
-      });
-
+      // Run ajax call to get data
+      $.ajax({
+          url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
+      }).done(function (data) {
+          data.watched = false;
+          data.rating = "Not rated";
+          console.log(data);
+          myFirebaseRef.push(data);
+        });
   });
 
   /// database delete function ///
