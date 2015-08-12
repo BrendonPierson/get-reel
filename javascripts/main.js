@@ -17,23 +17,27 @@ requirejs.config({
 });
 
 requirejs(
-  ["firebase", "jquery","lodash", "hbs", "bootstrap","delete"],
+  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete"],
   function(_firebase, $, _, Handlebars, bootstrap, deleter) {
   var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
-  
-  allMovies = {}; /// declared outside  myFirebaseRef() to increase scope ///
+  /// declared outside  myFirebaseRef() to increase scope ///  
+  allMovies = {}; 
+
   myFirebaseRef.on("value", function(snapshot) {
     allMovies = snapshot.val();
     var allMoviesArray = [];
     for (var key in allMovies) {
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
-    allMoviesObject = {movies: allMoviesArray};
-
+    
     require(['hbs!../templates/movies'], function(template) {
       $(".row").html(template(allMoviesArray));
     });
+
+    // automatically deletes element from database if "Movie not Found" //
+    var errorKey = _.findKey(allMovies, {'Error': "Movie not found!"}); 
+    deleter.delete(errorKey);
   });
   
   // On clicking "Spin the Reel":
