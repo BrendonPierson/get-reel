@@ -27,13 +27,12 @@ requirejs(
   myFirebaseRef.on("value", function(snapshot) {
     // console.log(snapshot.val());
     allMovies = snapshot.val();
+
     var allMoviesArray = [];
-     // Convert Firebase's object of objects into an array of objects
     for (var key in allMovies) {
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
     var allMoviesObject = {movies: allMoviesArray};
-    // console.log(allMoviesObject);
 
     require(['hbs!../templates/movies'], function(template) {
       $(".row").html(template(allMoviesArray));
@@ -62,6 +61,10 @@ requirejs(
   // On clicking "Spin the Reel":
   $('#movie-search').click(function () {
 
+  });
+  
+  // On clicking "Spin the Reel":
+  $('#movie-search').click(function () {
     // Capture user input
     var titleInput = $('#title-input').val();
     var yearInput = $('#year-input').val(); 
