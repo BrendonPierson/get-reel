@@ -1,5 +1,5 @@
 body {
-    padding-top: 150px;
+    padding-top: 140px;
     background-image: url('http://scrappen.com/images/img7/movie-reel-wallpaper-border-hd-widescreen-11.png');
 }
 
@@ -8,9 +8,9 @@ body {
 // }
 
 .navbar {
-    
+    height: 135px;
     // background-image: url('http://www.irishnetworkchina.com/wp-content/uploads/2012/11/movie-reel.jpg');
-    background-color:rgba(255,0,0,0.5);
+    background-color:rgba(0,0,0,0.7); 
 }
 
 h1 {
@@ -18,11 +18,38 @@ h1 {
     font-family: "Overlock";
     font-weight: 900;
     font-size: 50px;
-    text-shadow: 2px 2px #000;
+    text-shadow: 2px 2px #286090;
+    color: white;
+}
+
+#subheader {
+    font-family: "Overlock";
+    font-weight: 400;
+    font-size: 24px;
+    text-shadow: 2px 2px #286090;
     color: white;
 }
 
 #add-movie {
-    display: inline-block;
-    text-align: right;
+    float: right;
+    margin-top: 50px;
+    width: 30%;
+    font-family: "Overlock";
+    font-weight: 400;
+    font-size: 24px;
 }
+
+.thumbnail {
+    height: 340px;
+    font-family: "Overlock";
+    font-weight: 400;
+    padding: 10px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+
+

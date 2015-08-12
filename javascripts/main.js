@@ -34,14 +34,29 @@ requirejs(
     }
     var allMoviesObject = {movies: allMoviesArray};
 
-    // If rating >= 1 (i.e. if movie has been rating), show user rating.
-    
-
-    
-
     require(['hbs!../templates/movies'], function(template) {
+      // Places data from Firebase into movie handlebars template.
       $(".row").html(template(allMoviesArray));
+
+      // Places styling on Watched button if movie has been seen.
+      $.each($('.true'), function (index, val) {
+        $(val).text("Watched");
+        $(val).css("background-color", "#286090");
+        $(val).css("color", "white");
+      });
+      $.each($('.false'), function (index, val) {
+        $(val).text("I've Seen This Movie");
+      });
+      $.each($('.false'), function (index, val) {
+        $(val).text("I've Seen This Movie");
+      });
+      // $.each($('.submitted-rating'), function (index, val) {
+      //   if ()
+      // });
+      
     });
+
+    
 
     //automatically deletes duplicates //
     var allTitles = [];
@@ -81,7 +96,7 @@ requirejs(
 // On clicking "Spin the Reel": (consider moving this function to module?)
   $('#movie-search').click(function () {
       // Close form: (possible modification - on click, hidden div displays with the movie info asking to confirm the selection.)
-
+      
       // Capture user input
       var titleInput = $('#title-input').val();
       var yearInput = $('#year-input').val(); 
