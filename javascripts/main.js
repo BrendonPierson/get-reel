@@ -17,13 +17,16 @@ requirejs.config({
 });
 
 requirejs(
-  ["firebase", "jquery","lodash", "hbs", "bootstrap"],
-  function(_firebase, $, _, Handlebars, bootstrap) {
+  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete"],
+  function(_firebase, $, _, Handlebars, bootstrap, deleter) {
   var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
+
+  // Declare allMovies for require scope
+  var allMovies = {};
 
   myFirebaseRef.on("value", function(snapshot) {
     // console.log(snapshot.val());
-    var allMovies = snapshot.val();
+    allMovies = snapshot.val();
     var allMoviesArray = [];
      // Convert Firebase's object of objects into an array of objects
     for (var key in allMovies) {
@@ -35,10 +38,29 @@ requirejs(
     require(['hbs!../templates/movies'], function(template) {
       $(".row").html(template(allMoviesArray));
     });
-  });
+
+    //automatically deletes duplicates //
+    var allTitles = [];
+    allTitles = _.pluck(allMovies, 'Title');
+    allTitles.sort();
+
+    for (var i = 0; i < allTitles.length; i++) {
+      if (allTitles[i] === allTitles[i + 1]) {
+        var duplicatedKey = allTitles[i];
+        var deleteKey = _.findKey(allMovies, {'Title': duplicatedKey});
+        console.log("deleteKey :", deleteKey);
+        deleter.delete(deleteKey);
+      }
+    }
+
+    //automatically deletes element from database if "Movie not Found" //
+    var errorKey = _.findKey(allMovies, {'Error': "Movie not found!"}); 
+    deleter.delete(errorKey);
+
+  }); // End of Firebase snapshot
   
-// On clicking "Spin the Reel":
-$('#movie-search').click(function () {
+  // On clicking "Spin the Reel":
+  $('#movie-search').click(function () {
 
     // Capture user input
     var titleInput = $('#title-input').val();
@@ -56,13 +78,25 @@ $('#movie-search').click(function () {
         
         myFirebaseRef.push(data);
 
-        });
+      });
 
-        });
+  });
+
+  /// database delete function ///
+  $(document).on("click", '#delete', function() {
+    // console.log("you clicked delete");
+    var deleteTitle = $(this).siblings().children('h3').html();
+    // console.log("deleteTitle :", deleteTitle)
+    var titleKey = '';
+    // console.log("allMovies :", allMovies);
+    titleKey = _.findKey(allMovies, {'Title': deleteTitle});
+    // console.log("titleKey :", titleKey);
+    deleter.delete(titleKey);
+    $(this).parent().remove();
+  });
 
 
-
-    });
+});
 
 
 
