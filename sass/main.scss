@@ -1,1 +1,11 @@
-body {padding-top: 120px;}
+body {
+    padding-top: 120px;
+}
+
+body > .container {
+    width: 80%;
+}
+
+.thumbnail {
+    height: 350px;
+}

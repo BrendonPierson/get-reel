@@ -1,4 +1,10 @@
 body {
   padding-top: 120px; }
 
+body > .container {
+  width: 80%; }
+
+.thumbnail {
+  height: 350px; }
+
 /*# sourceMappingURL=main.css.map */
