@@ -5,20 +5,23 @@ requirejs.config({
     'firebase' : '../bower_components/firebase/firebase',
     'hbs' : '../bower_components/require-handlebars-plugin/hbs',
     'bootstrap' : '../bower_components/bootstrap/dist/js/bootstrap.min',
-    'lodash' : '../bower_components/lodash/lodash.min'
+    'lodash' : '../bower_components/lodash/lodash.min',
+    'rating2' : '../bower_components/bootstrap-rating/bootstrap-rating.min'
   },
   shim: {
     'bootstrap': ['jquery'],
     'material': ['bootstrap'],
+    'rating2' : ['bootstrap'],
     'firebase': {
       exports: 'Firebase'
     }
   }
 });
 
+
 requirejs(
-  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete", "watched", "rating"],
-  function(_firebase, $, _, Handlebars, bootstrap, deleter, watched, rating) {
+  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete", "watched", "rating", "rating2"],
+  function(_firebase, $, _, Handlebars, bootstrap, deleter, watched, rating, rating2) {
   var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
   // Declare allMovies for require scope
@@ -50,9 +53,9 @@ requirejs(
       $.each($('.false'), function (index, val) {
         $(val).text("I've Seen This Movie");
       });
-      // $.each($('.submitted-rating'), function (index, val) {
-      //   if ()
-      // });
+
+      $('.myRating').rating();
+
       
     });
 
@@ -96,7 +99,7 @@ requirejs(
 // On clicking "Spin the Reel": (consider moving this function to module?)
   $('#movie-search').click(function () {
       // Close form: (possible modification - on click, hidden div displays with the movie info asking to confirm the selection.)
-      
+
       // Capture user input
       var titleInput = $('#title-input').val();
       var yearInput = $('#year-input').val(); 
@@ -143,24 +146,34 @@ requirejs(
     watched.movieWatched(this, watchedProperty, true);
   });
 
-  $(document).on('click', '.submit-rating', function (e) {
-    e.preventDefault();
-    // Create submit-rating module to add rating to Firebase (see above click function)
-    var userRating = $(this).siblings('.form-group').children('.rating').children('option:selected').text();
-    // console.log(userRating);
-    var ratedMovie = $(this).parent().siblings('#movieName').text();
-    // console.log(ratedMovie);
-    var allTitles = [];
-    allTitles = _.pluck(allMovies, 'Title');
-     for (var i = 0; i < allTitles.length; i++) {
-       if (allTitles[i] === ratedMovie) {
-         ratingKey = _.findKey(allMovies, {'Title': ratedMovie});
-         // console.log(ratingKey);
-       }
-      }
-      // console.log(ratingKey);
-    rating.submitRating(this, ratingKey, userRating);
+
+
+  $('input').on('change', function (e) {
+      var rate = $(this).rating('rate');
+      console.log(rate);
   });
+
+
+
+
+
+  //   e.preventDefault();
+  //   // Create submit-rating module to add rating to Firebase (see above click function)
+  //   var userRating = $(this).siblings('.form-group').children('.rating').children('option:selected').text();
+  //   // console.log(userRating);
+  //   var ratedMovie = $(this).parent().siblings('#movieName').text();
+  //   // console.log(ratedMovie);
+  //   var allTitles = [];
+  //   allTitles = _.pluck(allMovies, 'Title');
+  //    for (var i = 0; i < allTitles.length; i++) {
+  //      if (allTitles[i] === ratedMovie) {
+  //        ratingKey = _.findKey(allMovies, {'Title': ratedMovie});
+  //        // console.log(ratingKey);
+  //      }
+  //     }
+  //     // console.log(ratingKey);
+  //   rating.submitRating(this, ratingKey, userRating);
+  // });
 
 
 });
