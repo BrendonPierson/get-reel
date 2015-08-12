@@ -95,6 +95,30 @@ requirejs(
     $(this).parent().remove();
   });
 
+  // Watched function
+  $(document).on('click', '.watched', function (e) {
+    e.preventDefault();
+    // Grab the key from Firebase and change key watched to true
+
+    var allTitles = [];
+    var watchedMovie = $(this).siblings('.caption').children('#movieName').text();
+    allTitles = _.pluck(allMovies, 'Title');
+     for (var i = 0; i < allTitles.length; i++) {
+       if (allTitles[i] === watchedMovie) {
+         watchedProperty = _.findKey(allMovies, {'Title': watchedMovie});
+         // console.log(watchedProperty);
+       }
+      }
+    // Run movieWatched function from watched.js module.
+    watched.movieWatched(this, watchedProperty, true);
+  });
+
+  $(document).on('click', '.submit-rating', function (e) {
+    e.preventDefault();
+    // Create submit-rating module to add rating to Firebase (see above click function)
+      
+  });
+
 
 });
 
