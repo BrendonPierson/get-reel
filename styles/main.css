@@ -38,4 +38,7 @@ h1 {
 a:hover {
   text-decoration: none; }
 
+.hidden {
+  display: none; }
+
 /*# sourceMappingURL=main.css.map */

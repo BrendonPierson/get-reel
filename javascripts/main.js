@@ -82,7 +82,7 @@ requirejs(
       if (allTitles[i] === allTitles[i + 1]) {
         var duplicatedKey = allTitles[i];
         var deleteKey = _.findKey(allMovies, {'Title': duplicatedKey});
-        console.log("deleteKey :", deleteKey);
+        // console.log("deleteKey :", deleteKey);
         deleter.delete(deleteKey);
       }
     }
@@ -104,7 +104,7 @@ requirejs(
   // On clicking "Spin the Reel": (consider moving this function to module?)
   $('#movie-search').click(function () {
       // Close form: (possible modification - on click, hidden div displays with the movie info asking to confirm the selection.)
-
+      $('#confirmation').removeClass('hidden');
       // Capture user input
       var titleInput = $('#title-input').val();
       var yearInput = $('#year-input').val(); 
@@ -118,15 +118,18 @@ requirejs(
           console.log(data);
           myFirebaseRef.push(data);
         });
+      // return data
   });
+
+  
 
 
 
   /// database delete function ///
-  $(document).on("click", '#delete', function() {
+  $(document).on("click", '.delete', function() {
     // console.log("you clicked delete");
     var deleteTitle = $(this).siblings().children('h3').html();
-    // console.log("deleteTitle :", deleteTitle)
+    // console.log("deleteTitle :", deleteTitle);
     var titleKey = '';
     // console.log("allMovies :", allMovies);
     titleKey = _.findKey(allMovies, {'Title': deleteTitle});
