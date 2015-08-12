@@ -30,12 +30,26 @@ requirejs(
     for (var key in allMovies) {
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
-    
+
     require(['hbs!../templates/movies'], function(template) {
       $(".row").html(template(allMoviesArray));
     });
 
-    // automatically deletes element from database if "Movie not Found" //
+
+    //automatically deletes duplicates //
+    var allTitles = [];
+    allTitles = _.pluck(allMovies, 'Title');
+    allTitles.sort();
+    for (var i = 0; i < allTitles.length; i++) {
+      if (allTitles[i] === allTitles[i + 1]) {
+        var duplicatedKey = allTitles[i];
+        var deleteKey = _.findKey(allMovies, {'Title': duplicatedKey});
+        console.log("deleteKey :", deleteKey);
+        deleter.delete(deleteKey);
+      }
+    }
+
+    //automatically deletes element from database if "Movie not Found" //
     var errorKey = _.findKey(allMovies, {'Error': "Movie not found!"}); 
     deleter.delete(errorKey);
   });
