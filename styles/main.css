@@ -3,7 +3,7 @@ body {
   background-image: url("../movie-reel-wallpaper-border-hd-widescreen-11.png"); }
 
 .navbar {
-  height: 135px;
+  height: 100px;
   background-color: rgba(0, 0, 0, 0.7); }
 
 h1 {
@@ -23,7 +23,7 @@ h1 {
 
 #add-movie {
   float: right;
-  margin-bottom: 50px;
+  margin-top: 50px;
   width: 30%;
   font-family: "Overlock";
   font-weight: 400;
