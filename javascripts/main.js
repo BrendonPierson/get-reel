@@ -20,8 +20,8 @@ requirejs.config({
 
 
 requirejs(
-  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete", "watched", "rating", "rating2"],
-  function(_firebase, $, _, Handlebars, bootstrap, deleter, watched, rating, rating2) {
+  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete", "watched", "rating", "rating2", "find"],
+  function(_firebase, $, _, Handlebars, bootstrap, deleter, watched, rating, rating2, find) {
   var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
   // Declare allMovies for require scope
