@@ -6,6 +6,6 @@ define(["jquery", "firebase"], function ($, _firebase) {
       method: 'GET'
     }).done(function (data) {
         console.log(data);
-    });
-  }//end of find click
-}//end of module
+    });//end of ajax done
+  });//end of find click
+});//end of module
