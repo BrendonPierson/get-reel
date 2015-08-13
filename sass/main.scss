@@ -53,6 +53,18 @@ a:hover {
     display: none;
 }
 
+.wrapper {
+   position: relative;
+}
+
+.wrapper .glyphicon {
+    padding-left: 30px;
+   // position: absolute
+   // top: 20px;
+   // left: 60px;
+
+}
+
 // @media (min-width: 500px) and (max-width: 1000px) {
 //  .col-xs-4 { width: 50%; }
 //    .thumbnail {
