@@ -6,7 +6,8 @@ requirejs.config({
     'hbs' : '../bower_components/require-handlebars-plugin/hbs',
     'bootstrap' : '../bower_components/bootstrap/dist/js/bootstrap.min',
     'lodash' : '../bower_components/lodash/lodash.min',
-    'rating2' : '../bower_components/bootstrap-rating/bootstrap-rating.min'
+    'rating2' : '../bower_components/bootstrap-rating/bootstrap-rating.min',
+    'jqueryui': '../jquery-ui/jquery-ui.min'
   },
   shim: {
     'bootstrap': ['jquery'],
@@ -18,8 +19,8 @@ requirejs.config({
   }
 });
 requirejs(
-  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete", "watched", "rating", "rating2", "find", "populateHTML", "search"],
-  function(_firebase, $, _, Handlebars, bootstrap, deleter, watched, rating, rating2, find, populateHTML, search) {
+  ["firebase", "jquery","jqueryui", "lodash", "hbs", "bootstrap", "delete", "watched", "rating", "rating2", "find", "populateHTML", "search"],
+  function(_firebase, $, jqueryUI, _, Handlebars, bootstrap, deleter, watched, rating, rating2, find, populateHTML, search) {
     var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
     // Declare allMovies for require scope
@@ -30,18 +31,29 @@ requirejs(
       allMovies = snapshot.val();
 
     var allMoviesArray = [];
+    var allMoviesTitles = [];
+
+   
 
     for (var key in allMovies) {
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
+
+     for(var i = 0; i < allMoviesArray.length; i++){
+      allMoviesTitles[allMoviesTitles.length] = allMoviesArray[i].Title;
+    }
+    console.log("titles array", allMoviesTitles);
+
 
     // var allMoviesObject = {movies: allMoviesArray};
 
     //put movies in html from firebase
     if($(location).attr('pathname') === "/index.html"){
       populateHTML.putWishListMoviesInHTML(allMovies);
+
     } else {
       populateHTML.putWatchedMoviesInHTML(allMovies);  
+
     }
     
     
@@ -52,42 +64,34 @@ requirejs(
       var userInput = $("#userInput").val();
       search.search(userInput, allMovies);
       $("#userInput").val('');
+
     });
    
+    $("#userInput").autocomplete({
+      source: allMoviesTitles
+    });
 
 
-
-    require(['hbs!../templates/moviesSearch'], function(template) {
       // Places data from Firebase into movie handlebars template.
       // $("#moviesDiv").html(template(allMoviesArray));
 
       // Places styling on Watched button if movie has been seen.
-      $.each($('.true'), function (index, val) {
-        $(val).text("Watched");
-        $(val).css("background-color", "#286090");
-        $(val).css("color", "white");
-      });
-      $.each($('.false'), function (index, val) {
-        $(val).text("I've Seen This Movie");
-      });
-      $.each($('.false'), function (index, val) {
-        $(val).text("I've Seen This Movie");
-      });
+      // $.each($('.true'), function (index, val) {
+      //   $(val).text("Watched");
+      //   $(val).css("background-color", "#286090");
+      //   $(val).css("color", "white");
+      // });
+      // $.each($('.false'), function (index, val) {
+      //   $(val).text("I've Seen This Movie");
+      // });
+      // $.each($('.false'), function (index, val) {
+      //   $(val).text("I've Seen This Movie");
+      // });
 
-      $('.myRating').rating();
+      // $('.myRating').rating();
 
-      $('input').on('change', function (e) {
-        var userRating = $(this).attr('value');
-        // Capture a variable that gets title/key
-        var ratingTitle = $(this).parent().parent().siblings('h3').html();
-        // console.log(ratingTitle);
-        // console.log("allMovies :", allMovies);
-        var titleKey = _.findKey(allMovies, {'Title': ratingTitle});
-        // console.log(titleKey);
-        var ref = new Firebase('https://get-reel.firebaseio.com/' + titleKey);
-        ref.update({rating: userRating});
-      });
-    });
+      
+ 
 
     // //automatically deletes duplicates //
     // var allTitles = [];

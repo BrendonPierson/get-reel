@@ -1,4 +1,4 @@
-define(["jquery", "hbs"], function($, Handlebars){
+define(["jquery", "hbs", "populateHTML"], function($, Handlebars, populateHTML){
   return {
     search: function(userInput, data){
       filteredMovies = [];
@@ -8,6 +8,7 @@ define(["jquery", "hbs"], function($, Handlebars){
         }
       }
       console.log("filteredMovies", filteredMovies);
+      populateHTML.putSearchInHTML(filteredMovies);
     }      
   }; //end return
 }); //end define
