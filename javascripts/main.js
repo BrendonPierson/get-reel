@@ -28,7 +28,7 @@ requirejs(
   var allMovies = {};
 
   myFirebaseRef.on("value", function(snapshot) {
-    // console.log(snapshot.val());
+    console.log(snapshot.val());
     allMovies = snapshot.val();
 
     var allMoviesArray = [];
@@ -40,7 +40,19 @@ requirejs(
 
     require(['hbs!../templates/moviesWatched'], function(template) {
       // Places data from Firebase into movie handlebars template.
+      $("#watchedMoviesDiv").html(template(allMoviesArray));
+    });
+
+    require(['hbs!../templates/moviesWishList'], function(template) {
+      // Places data from Firebase into movie handlebars template.
       $("#wishListMoviesDiv").html(template(allMoviesArray));
+    });
+
+
+
+    require(['hbs!../templates/moviesSearch'], function(template) {
+      // Places data from Firebase into movie handlebars template.
+      $("#moviesSearchDiv").html(template(allMoviesArray));
 
       // Places styling on Watched button if movie has been seen.
       $.each($('.true'), function (index, val) {
@@ -59,36 +71,36 @@ requirejs(
 
       $('input').on('change', function (e) {
         var userRating = $(this).attr('value');
-      // Capture a variable that gets title/key
-      var ratingTitle = $(this).parent().parent().siblings('h3').html();
-      // console.log(ratingTitle);
-      // console.log("allMovies :", allMovies);
-      var titleKey = _.findKey(allMovies, {'Title': ratingTitle});
-      // console.log(titleKey);
+        // Capture a variable that gets title/key
+        var ratingTitle = $(this).parent().parent().siblings('h3').html();
+        // console.log(ratingTitle);
+        // console.log("allMovies :", allMovies);
+        var titleKey = _.findKey(allMovies, {'Title': ratingTitle});
+        // console.log(titleKey);
         var ref = new Firebase('https://get-reel.firebaseio.com/' + titleKey);
-          ref.update({rating: userRating});
+        ref.update({rating: userRating});
       });
     });
 
-    //automatically deletes duplicates //
-    var allTitles = [];
-    allTitles = _.pluck(allMovies, 'Title');
-    allTitles.sort();
-    for (var i = 0; i < allTitles.length; i++) {
-      if (allTitles[i] === allTitles[i + 1]) {
-        var duplicatedKey = allTitles[i];
-        var deleteKey = _.findKey(allMovies, {'Title': duplicatedKey});
-        // console.log("deleteKey :", deleteKey);
-        deleter.delete(deleteKey);
-      }
-    }
+    // //automatically deletes duplicates //
+    // var allTitles = [];
+    // allTitles = _.pluck(allMovies, 'Title');
+    // allTitles.sort();
+    // for (var i = 0; i < allTitles.length; i++) {
+    //   if (allTitles[i] === allTitles[i + 1]) {
+    //     var duplicatedKey = allTitles[i];
+    //     var deleteKey = _.findKey(allMovies, {'Title': duplicatedKey});
+    //     // console.log("deleteKey :", deleteKey);
+    //     deleter.delete(deleteKey);
+    //   }
+    // }
 
-    //automatically deletes element from database if "Movie not Found" //
-    var errorKey = _.findKey(allMovies, {'Error': "Movie not found!"}); 
-    deleter.delete(errorKey);
-    for (i = 0; i < allMoviesArray; i++) {
-      console.log(allMoviesArray[i].rating);
-    }
+    // //automatically deletes element from database if "Movie not Found" //
+    // var errorKey = _.findKey(allMovies, {'Error': "Movie not found!"}); 
+    // deleter.delete(errorKey);
+    // for (i = 0; i < allMoviesArray; i++) {
+    //   console.log(allMoviesArray[i].rating);
+    // }
   }); // End of Firebase snapshot
   
   // On clicking "Spin the Reel": (consider moving this function to module?)
@@ -101,7 +113,7 @@ requirejs(
 
     // Run ajax call to get data
     $.ajax({
-        url: 'http://www.omdbapi.com/?s=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
+        url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
     }).done(function (data) {
         data.watched = false;
         data.rating = "Not rated";

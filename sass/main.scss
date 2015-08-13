@@ -3,9 +3,6 @@ body {
     background-image: url('../movie-reel-wallpaper-border-hd-widescreen-11.png');
 }
 
-// .container {
-//   width: 60%;     
-// }
 
 .navbar {
     height: 135px;
@@ -40,10 +37,10 @@ h1 {
 }
 
 .thumbnail {
-    height: 700px;
+    // height: 700px;
     font-family: "Overlock";
     font-weight: 400;
-    padding: 10px;
+    // padding: 10px;
 }
 
 a:hover {
@@ -54,20 +51,20 @@ a:hover {
     display: none;
 }
 
-@media (min-width: 500px) and (max-width: 1000px) {
- .col-xs-4 { width: 50%; }
-   .thumbnail {
-   margin-left: auto;
-   margin-right: auto;
-   }
-}
-@media (max-width: 500px) {
- .col-xs-4 { width: 80%; }
- .thumbnail {
-   margin-left: auto;
-   margin-right: auto;
-   }
-}
+// @media (min-width: 500px) and (max-width: 1000px) {
+//  .col-xs-4 { width: 50%; }
+//    .thumbnail {
+//    margin-left: auto;
+//    margin-right: auto;
+//    }
+// }
+// @media (max-width: 500px) {
+//  .col-xs-4 { width: 80%; }
+//  .thumbnail {
+//    margin-left: auto;
+//    margin-right: auto;
+//    }
+// }
 
 
 
