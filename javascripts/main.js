@@ -17,36 +17,38 @@ requirejs.config({
     }
   }
 });
-
-
 requirejs(
-  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete", "watched", "rating", "rating2", "find"],
-  function(_firebase, $, _, Handlebars, bootstrap, deleter, watched, rating, rating2, find) {
-  var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
+  ["firebase", "jquery","lodash", "hbs", "bootstrap", "delete", "watched", "rating", "rating2", "find", "populateHTML", "search"],
+  function(_firebase, $, _, Handlebars, bootstrap, deleter, watched, rating, rating2, find, populateHTML, search) {
+    var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
-  // Declare allMovies for require scope
-  var allMovies = {};
+    // Declare allMovies for require scope
+    var allMovies = {};
 
-  myFirebaseRef.on("value", function(snapshot) {
-    console.log(snapshot.val());
-    allMovies = snapshot.val();
+    myFirebaseRef.on("value", function(snapshot) {
+      console.log(snapshot.val());
+      allMovies = snapshot.val();
 
     var allMoviesArray = [];
 
     for (var key in allMovies) {
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
-    var allMoviesObject = {movies: allMoviesArray};
 
-    require(['hbs!../templates/moviesWatched'], function(template) {
-      // Places data from Firebase into movie handlebars template.
-      $("#watchedMoviesDiv").html(template(allMoviesArray));
-    });
+    // var allMoviesObject = {movies: allMoviesArray};
 
-    require(['hbs!../templates/moviesWishList'], function(template) {
-      // Places data from Firebase into movie handlebars template.
-      $("#wishListMoviesDiv").html(template(allMoviesArray));
+    //put movies in html from firebase
+    populateHTML.putWatchedMoviesInHTML(allMovies);
+    populateHTML.putWishListMoviesInHTML(allMovies);
+
+    //////////DOM EVENT HANDLERS//////////
+    $('button[type="submit"]').click(function(e){
+      e.preventDefault();
+      var userInput = $("#userInput").val();
+      search.search(userInput, allMovies);
+      $("#userInput").val('');
     });
+   
 
 
 
