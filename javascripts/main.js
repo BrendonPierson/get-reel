@@ -38,8 +38,13 @@ requirejs(
     // var allMoviesObject = {movies: allMoviesArray};
 
     //put movies in html from firebase
-    populateHTML.putWatchedMoviesInHTML(allMovies);
-    populateHTML.putWishListMoviesInHTML(allMovies);
+    if($(location).attr('pathname') === "/index.html"){
+      populateHTML.putWishListMoviesInHTML(allMovies);
+    } else {
+      populateHTML.putWatchedMoviesInHTML(allMovies);  
+    }
+    
+    
 
     //////////DOM EVENT HANDLERS//////////
     $('button[type="submit"]').click(function(e){
@@ -54,7 +59,7 @@ requirejs(
 
     require(['hbs!../templates/moviesSearch'], function(template) {
       // Places data from Firebase into movie handlebars template.
-      $("#moviesSearchDiv").html(template(allMoviesArray));
+      // $("#moviesDiv").html(template(allMoviesArray));
 
       // Places styling on Watched button if movie has been seen.
       $.each($('.true'), function (index, val) {

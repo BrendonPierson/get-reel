@@ -1,13 +1,14 @@
 define(["jquery", "hbs"], function($, Handlebars){
   return {
     putWatchedMoviesInHTML: function(data) {
+        console.log("data", data);
         require(['hbs!../templates/moviesWatched'],function(movieTemplate){
-          $("#MoviesDiv").html(movieTemplate(data));
+          $("#moviesDiv").html(movieTemplate(data));
         });
       },
       putWishListMoviesInHTML: function(data) {
         require(['hbs!../templates/moviesWishList'],function(movieTemplate){
-          $("#MoviesDiv").html(movieTemplate(data));
+          $("#moviesDiv").html(movieTemplate(data));
         });
       },
       putSearchInHTML: function(data) {
