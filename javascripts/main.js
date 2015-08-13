@@ -38,9 +38,9 @@ requirejs(
     }
     var allMoviesObject = {movies: allMoviesArray};
 
-    require(['hbs!../templates/movies'], function(template) {
+    require(['hbs!../templates/moviesWatched'], function(template) {
       // Places data from Firebase into movie handlebars template.
-      $(".row").html(template(allMoviesArray));
+      $("#wishListMoviesDiv").html(template(allMoviesArray));
 
       // Places styling on Watched button if movie has been seen.
       $.each($('.true'), function (index, val) {
@@ -101,7 +101,7 @@ requirejs(
 
     // Run ajax call to get data
     $.ajax({
-        url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
+        url: 'http://www.omdbapi.com/?s=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
     }).done(function (data) {
         data.watched = false;
         data.rating = "Not rated";
