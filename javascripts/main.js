@@ -32,6 +32,7 @@ requirejs(
     allMovies = snapshot.val();
 
     var allMoviesArray = [];
+
     for (var key in allMovies) {
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
@@ -67,17 +68,12 @@ requirejs(
         var ref = new Firebase('https://get-reel.firebaseio.com/' + titleKey);
           ref.update({rating: userRating});
       });
-
-      
     });
-
-    
 
     //automatically deletes duplicates //
     var allTitles = [];
     allTitles = _.pluck(allMovies, 'Title');
     allTitles.sort();
-
     for (var i = 0; i < allTitles.length; i++) {
       if (allTitles[i] === allTitles[i + 1]) {
         var duplicatedKey = allTitles[i];
@@ -90,55 +86,42 @@ requirejs(
     //automatically deletes element from database if "Movie not Found" //
     var errorKey = _.findKey(allMovies, {'Error': "Movie not found!"}); 
     deleter.delete(errorKey);
-
-    // console.log(allMoviesArray);
-    // Hide select box if movie has been rated.
-     for (i = 0; i < allMoviesArray; i++) {
+    for (i = 0; i < allMoviesArray; i++) {
       console.log(allMoviesArray[i].rating);
     }
-
   }); // End of Firebase snapshot
-
-
   
   // On clicking "Spin the Reel": (consider moving this function to module?)
   $('#movie-search').click(function () {
-      // Close form: (possible modification - on click, hidden div displays with the movie info asking to confirm the selection.)
-      $('#confirmation').removeClass('hidden');
-      // Capture user input
-      var titleInput = $('#title-input').val();
-      var yearInput = $('#year-input').val(); 
+    // Close form: (possible modification - on click, hidden div displays with the movie info asking to confirm the selection.)
+    $('#confirmation').removeClass('hidden');
+    // Capture user input
+    var titleInput = $('#title-input').val();
+    var yearInput = $('#year-input').val(); 
 
-      // Run ajax call to get data
-      $.ajax({
-          url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
-      }).done(function (data) {
-          data.watched = false;
-          data.rating = "Not rated";
-          console.log(data);
-          myFirebaseRef.push(data);
-        });
-      // return data
+    // Run ajax call to get data
+    $.ajax({
+        url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
+    }).done(function (data) {
+        data.watched = false;
+        data.rating = "Not rated";
+        console.log(data);
+        myFirebaseRef.push(data);
+    });
   });
-
-  
-
-
 
   /// database delete function ///
   $(document).on("click", '.delete', function() {
     // console.log("you clicked delete");
     var deleteTitle = $(this).siblings().children('h3').html();
-    // console.log("deleteTitle :", deleteTitle);
+    console.log("deleteTitle :", deleteTitle);
     var titleKey = '';
-    // console.log("allMovies :", allMovies);
+    console.log("allMovies :", allMovies);
     titleKey = _.findKey(allMovies, {'Title': deleteTitle});
-    // console.log("titleKey :", titleKey);
+    console.log("titleKey :", titleKey);
     deleter.delete(titleKey); // Run from delete.js module
     $(this).parent().remove();
   });
-
-
 
   // Watched function
   $(document).on('click', '.watched', function (e) {
@@ -148,17 +131,16 @@ requirejs(
     var allTitles = [];
     var watchedMovie = $(this).siblings('.caption').children('#movieName').text();
     allTitles = _.pluck(allMovies, 'Title');
-     for (var i = 0; i < allTitles.length; i++) {
-       if (allTitles[i] === watchedMovie) {
-         watchedProperty = _.findKey(allMovies, {'Title': watchedMovie});
-         // console.log(watchedProperty);
-       }
+      for (var i = 0; i < allTitles.length; i++) {
+        if (allTitles[i] === watchedMovie) {
+          watchedProperty = _.findKey(allMovies, {'Title': watchedMovie});
+          // console.log(watchedProperty);
+        }
       }
     // Run movieWatched function from watched.js module.
     watched.movieWatched(this, watchedProperty, true);
+    
   });
-
-
 
 });
 

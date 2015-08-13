@@ -30,7 +30,7 @@ h1 {
   font-size: 24px; }
 
 .thumbnail {
-  height: 340px;
+  height: 700px;
   font-family: "Overlock";
   font-weight: 400;
   padding: 10px; }
@@ -40,5 +40,20 @@ a:hover {
 
 .hidden {
   display: none; }
+
+@media (min-width: 500px) and (max-width: 1000px) {
+  .col-xs-4 {
+    width: 50%; }
+
+  .thumbnail {
+    margin-left: auto;
+    margin-right: auto; } }
+@media (max-width: 500px) {
+  .col-xs-4 {
+    width: 80%; }
+
+  .thumbnail {
+    margin-left: auto;
+    margin-right: auto; } }
 
 /*# sourceMappingURL=main.css.map */
