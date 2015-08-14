@@ -57,4 +57,10 @@ a:hover {
 .top-marg {
   margin-top: 10px; }
 
+@media (max-width: 991px) {
+  .thumbnail {
+    height: 270px;
+    font-family: "Overlock";
+    font-weight: 400; } }
+
 /*# sourceMappingURL=main.css.map */
