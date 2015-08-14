@@ -3,36 +3,40 @@ define(["jquery", "firebase", "populateHTML"], function ($, _firebase, populateH
   var posterLinks = [];
   var titles = [];
   var movieInfo = {};
-  $(document).on("click", '#add-movie', function() {
-    var userInput = $('#userInput').val().replace(/ /g, "+");
-    console.log("userInput: ", userInput);
-    $.ajax({
-      url: 'http://www.omdbapi.com/?s=' + userInput,
-      method: 'GET',
-      async: false
-    }).done(function (data) {
-      for (var i in data.Search) {
-        imdbId.push(data.Search[i].imdbID);
-      }
-      for (var j = 0; j < imdbId.length; j++) {
-        $.ajax({
-          url: 'http://www.omdbapi.com/?i=' + imdbId[j] + '&plot=short&r=json',
-          method: 'GET',
-          async: false
-        }).done(function (data) {
-          titles.push(data.Title);
-          posterLinks.push(data.Poster);
-        });
-      }
-      for (var k = 0; k < imdbId.length; k++) {        
-        movieInfo[imdbId[k]] = {};
-        movieInfo[imdbId[k]].Title = titles[k];
-        movieInfo[imdbId[k]].Poster = posterLinks[k];
-      }
-      console.log('movie info', movieInfo);
 
-      populateHTML.putFindInHTML(movieInfo);
-      $('#userInput').val('');
-    });//end of ajax id and poster calls
-  });//end of find click
+
+  return {
+    findMovies: function(userInput) {
+      console.log("userInput: ", userInput);
+      $.ajax({
+        url: 'http://www.omdbapi.com/?s=' + userInput,
+        method: 'GET',
+        async: false
+      }).done(function (data) {
+        for (var i in data.Search) {
+          imdbId.push(data.Search[i].imdbID);
+        }
+        for (var j = 0; j < imdbId.length; j++) {
+          $.ajax({
+            url: 'http://www.omdbapi.com/?i=' + imdbId[j] + '&plot=short&r=json',
+            method: 'GET',
+            async: false
+          }).done(function (data) {
+            titles.push(data.Title);
+            posterLinks.push(data.Poster);
+          });
+        }
+        for (var k = 0; k < imdbId.length; k++) {        
+          movieInfo[imdbId[k]] = {};
+          movieInfo[imdbId[k]].Title = titles[k];
+          movieInfo[imdbId[k]].Poster = posterLinks[k];
+        }
+        console.log('movie info', movieInfo);
+        $('#userInput').val('');
+        // populateHTML.putFindInHTML(movieInfo);
+        
+      });//end of ajax done calls
+      return movieInfo;
+    }//end Function
+  }; //end return 
 });//end of module

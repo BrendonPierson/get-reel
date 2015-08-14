@@ -9,6 +9,7 @@ define(["jquery", "hbs", "populateHTML"], function($, Handlebars, populateHTML){
       }
       console.log("filteredMovies", filteredMovies);
       populateHTML.putSearchInHTML(filteredMovies);
+      return filteredMovies;
     }      
   }; //end return
 }); //end define

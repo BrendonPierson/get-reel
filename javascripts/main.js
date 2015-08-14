@@ -67,15 +67,24 @@ requirejs(
     }
     
     
-
+    
     //////////DOM EVENT HANDLERS//////////
     $('button[type="submit"]').click(function(e){
+      var CombinedfilteredArrayOfMovies=[];
       e.preventDefault();
       var userInput = $("#userInput").val();
-      search.search(userInput, allMovies);
+      var foundMovies = find.findMovies(userInput);
+      for (key in foundMovies) {
+        CombinedfilteredArrayOfMovies[CombinedfilteredArrayOfMovies.length] = foundMovies[key];
+      }
+      CombinedfilteredArrayOfMovies[CombinedfilteredArrayOfMovies.length] = search.search(userInput, allMovies)[0];
       $("#userInput").val('');
-
+      console.log("CombinedfilteredArrayOfMovies", CombinedfilteredArrayOfMovies);
     });
+
+
+
+    
    
     $("#userInput").autocomplete({
       source: allMoviesTitles
@@ -90,6 +99,7 @@ requirejs(
     }).done(function(data) {
         data.watched = false;
         data.rating = "Not rated";
+        data.wished = true;
         console.log(data);
         myFirebaseRef.push(data); 
         $("body").removeClass("modal-open");    
