@@ -110,15 +110,26 @@ requirejs(
     var yearInput = $('#year-input').val(); 
 
     // Run ajax call to get data
-    $.ajax({
-        url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
-    }).done(function (data) {
-        data.watched = false;
-        data.rating = "Not rated";
-        console.log(data);
-        myFirebaseRef.push(data);
+    // $.ajax({
+    //     url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
+    // }).done(function (data) {
+    //     data.watched = false;
+    //     data.rating = "Not rated";
+    //     console.log(data);
+    //     myFirebaseRef.push(data);
 
-    });
+    // });
+  });
+
+  //rating updatefunction
+  $('.myRating').rating();
+
+  $('body').on('change','input', function (e) {
+  var userRating = $(this).attr('value');
+  var ratingTitle = $(this).parent().parent().parent().siblings().attr('alt');
+  var titleKey = _.findKey(allMovies, {'Title': ratingTitle});
+  var ref = new Firebase('https://get-reel.firebaseio.com/' + titleKey);
+  ref.update({rating: userRating});
   });
 
   /// database delete function ///
