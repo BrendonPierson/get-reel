@@ -63,9 +63,17 @@ a:hover {
   font-weight: 900;
   color: #000; }
 
-@media (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .thumbnail {
     height: 270px;
+    font-family: "Overlock";
+    font-weight: 400; } }
+@media (max-width: 767px) {
+  [class*="col-"] {
+    width: 100%; }
+
+  .thumbnail {
+    height: 450px;
     font-family: "Overlock";
     font-weight: 400; } }
 
