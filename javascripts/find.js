@@ -1,4 +1,4 @@
-define(["jquery", "firebase"], function ($, _firebase) {
+define(["jquery", "firebase", "populateHTML"], function ($, _firebase, populateHTML) {
   var imdbId = [];
   var posterLinks = [];
   var titles = [];
@@ -7,7 +7,8 @@ define(["jquery", "firebase"], function ($, _firebase) {
     var userInput = $('#userInput').val();
     $.ajax({
       url: 'http://www.omdbapi.com/?s=' + userInput,
-      method: 'GET'
+      method: 'GET',
+      async: false
     }).done(function (data) {
       for (var i in data.Search) {
         imdbId.push(data.Search[i].imdbID);
@@ -28,6 +29,8 @@ define(["jquery", "firebase"], function ($, _firebase) {
         movieInfo[imdbId[k]].Poster = posterLinks[k];
       }
       console.log(movieInfo);
+
+      populateHTML.putFindInHTML(movieInfo);
     });//end of ajax id and poster calls
   });//end of find click
 });//end of module
