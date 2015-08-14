@@ -123,8 +123,7 @@ requirejs(
 
   /// database delete function ///
   $(document).on("click", '.delete', function() {
-    // console.log("you clicked delete");
-    var deleteTitle = $(this).siblings().children('h3').html();
+    var deleteTitle = $(this).siblings().attr('alt');
     console.log("deleteTitle :", deleteTitle);
     var titleKey = '';
     console.log("allMovies :", allMovies);
@@ -140,7 +139,7 @@ requirejs(
     // Grab the key from Firebase and change key watched to true
 
     var allTitles = [];
-    var watchedMovie = $(this).siblings('.caption').children('#movieName').text();
+    var watchedMovie = $(this).siblings().attr('alt');
     allTitles = _.pluck(allMovies, 'Title');
       for (var i = 0; i < allTitles.length; i++) {
         if (allTitles[i] === watchedMovie) {
