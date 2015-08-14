@@ -4,7 +4,7 @@ define(["jquery", "firebase", "populateHTML"], function ($, _firebase, populateH
   var titles = [];
   var movieInfo = {};
   $(document).on("click", '#add-movie', function() {
-    var userInput = $('#userInput').val();
+    var userInput = $('#userInput').val().replace(/ /g, "+");
     $.ajax({
       url: 'http://www.omdbapi.com/?s=' + userInput,
       method: 'GET',

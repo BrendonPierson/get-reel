@@ -29,6 +29,7 @@ h1 {
   font-size: 24px; }
 
 .thumbnail {
+  height: 360px;
   font-family: "Overlock";
   font-weight: 400; }
 
@@ -52,5 +53,8 @@ a:hover {
   background-color: #000; }
   .wrapper .glyphicon:hover {
     background: rgba(0, 0, 0, 0.5); }
+
+.top-marg {
+  margin-top: 10px; }
 
 /*# sourceMappingURL=main.css.map */
