@@ -80,17 +80,24 @@ a:hover {
     color: #000;
 }
 
-@media (max-width: 991px) {
-.thumbnail {
+@media (min-width: 768px) and (max-width: 991px) {
+  .thumbnail {
     height: 270px;
     font-family: "Overlock";
     font-weight: 400;
   }
 }
 
-// @media (max-width: 767px) {
-//   .media: 
-// }
+@media (max-width: 767px) {
+  [class*="col-"] {
+      width: 100%;
+  }
+  .thumbnail {
+    height: 450px;
+    font-family: "Overlock";
+    font-weight: 400;
+  }
+}
 
 // @media (min-width: 500px) and (max-width: 1000px) {
 //  .col-xs-4 { width: 50%; }
