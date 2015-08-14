@@ -32,14 +32,8 @@ h1 {
   text-shadow: 2px 2px #286090;
   color: white; }
 
-#add-movie {
-  float: right;
-  width: 30%;
-  font-family: "Overlock";
-  font-weight: 400;
-  font-size: 24px; }
-
 .thumbnail {
+  height: 360px;
   font-family: "Overlock";
   font-weight: 400; }
 
@@ -56,12 +50,21 @@ a:hover {
   position: absolute;
   top: 10px;
   right: 20px;
-  font-size: 2em;
+  font-size: 1.5em;
   color: white;
   padding: 10px;
   border-radius: 100%;
-  background-color: #000; }
+  background: rgba(0, 0, 0, 0.2); }
   .wrapper .glyphicon:hover {
-    background: rgba(0, 0, 0, 0.5); }
+    background-color: #000; }
+
+.top-marg {
+  display: block;
+  margin: 10px auto 0 auto;
+  width: 100%; }
+
+.nav {
+  font-weight: 900;
+  color: #000; }
 
 /*# sourceMappingURL=main.css.map */

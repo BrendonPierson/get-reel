@@ -1,4 +1,12 @@
 define(["jquery", "hbs"], function($, Handlebars){
+  var compare = function(a,b) {
+      if (a.Title < b.Title)
+        return -1;
+      if (a.Title > b.Title)
+        return 1;
+      return 0;
+    };
+
   return {
     putWatchedMoviesInHTML: function(data) {
         console.log("data", data);
@@ -20,9 +28,13 @@ define(["jquery", "hbs"], function($, Handlebars){
       },
       putFindInHTML: function(data) {
         require(['hbs!../templates/moviesFind'],function(movieTemplate){
-          // $(DIV TO PUT DATA).html(movieTemplate(data));
+          $("#findResults").html('');
+          $("#findResults").html(movieTemplate(data));
         });
-      }      
+      },
+      alphabetize: function(dataArray) {
+        var sortedMovieArray = dataArray.sort(compare);
+      }    
     };
   }
 ); 

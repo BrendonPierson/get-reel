@@ -44,17 +44,26 @@ requirejs(
       allMoviesTitles[allMoviesTitles.length] = allMoviesArray[i].Title;
     }
 
-    var sortedMovieArray = allMoviesArray.sort(function(a, b){
-      return a.Title - b.Title;
-    });
+    function compare(a,b) {
+      if (a.Title < b.Title)
+        return -1;
+      if (a.Title > b.Title)
+        return 1;
+      return 0;
+    }
+
+    var sortedMovieArray = allMoviesArray.sort(compare);
+
+    // populateHTML.alphabetize(allMoviesArray);
+
     //not sure what the allMoviesObject is for
     // var allMoviesObject = {movies: allMoviesArray};
 
     //put movies in html from firebase base on what page you are on
     if($(location).attr('pathname') === "/index.html"){
-      populateHTML.putWishListMoviesInHTML(allMoviesArray);
+      populateHTML.putWishListMoviesInHTML(sortedMovieArray);
     } else {
-      populateHTML.putWatchedMoviesInHTML(allMoviesArray);  
+      populateHTML.putWatchedMoviesInHTML(sortedMovieArray);  
     }
     
     
@@ -74,6 +83,24 @@ requirejs(
 
   }); // End of Firebase snapshot
   
+
+  $(".modal").on('click', "#addMovie",function(){
+    $.ajax({
+      url: 'http://www.omdbapi.com/?i=' + $(this).parent().attr('id') + '&plot=short&r=json',
+    }).done(function(data) {
+        data.watched = false;
+        data.rating = "Not rated";
+        console.log(data);
+        myFirebaseRef.push(data); 
+        $("body").removeClass("modal-open");    
+        $("#myModal").slideUp('slow'); 
+        $("#myModal").modal('hide');
+      });
+  });
+
+
+
+
   // On clicking "Spin the Reel": (consider moving this function to module?)
   $('#movie-search').click(function () {
     // Close form: (possible modification - on click, hidden div displays with the movie info asking to confirm the selection.)
@@ -83,20 +110,31 @@ requirejs(
     var yearInput = $('#year-input').val(); 
 
     // Run ajax call to get data
-    $.ajax({
-        url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
-    }).done(function (data) {
-        data.watched = false;
-        data.rating = "Not rated";
-        console.log(data);
-        myFirebaseRef.push(data);
-    });
+    // $.ajax({
+    //     url: 'http://www.omdbapi.com/?t=' + titleInput + '&y=' + yearInput + '&plot=short&r=json'
+    // }).done(function (data) {
+    //     data.watched = false;
+    //     data.rating = "Not rated";
+    //     console.log(data);
+    //     myFirebaseRef.push(data);
+
+    // });
+  });
+
+  //rating updatefunction
+  $('.myRating').rating();
+
+  $('body').on('change','input[class="myRating"]', function (e) {
+  var userRating = $(this).attr('value');
+  var ratingTitle = $(this).parent().parent().parent().siblings().attr('alt');
+  var titleKey = _.findKey(allMovies, {'Title': ratingTitle});
+  var ref = new Firebase('https://get-reel.firebaseio.com/' + titleKey);
+  ref.update({rating: userRating});
   });
 
   /// database delete function ///
   $(document).on("click", '.delete', function() {
-    // console.log("you clicked delete");
-    var deleteTitle = $(this).siblings().children('h3').html();
+    var deleteTitle = $(this).siblings().attr('alt');
     console.log("deleteTitle :", deleteTitle);
     var titleKey = '';
     console.log("allMovies :", allMovies);
@@ -112,7 +150,7 @@ requirejs(
     // Grab the key from Firebase and change key watched to true
 
     var allTitles = [];
-    var watchedMovie = $(this).siblings('.caption').children('#movieName').text();
+    var watchedMovie = $(this).siblings().attr('alt');
     allTitles = _.pluck(allMovies, 'Title');
       for (var i = 0; i < allTitles.length; i++) {
         if (allTitles[i] === watchedMovie) {

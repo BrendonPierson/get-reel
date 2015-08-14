@@ -1,12 +1,12 @@
 {{#each this}}
 {{#unless watched}}
-  <div class='col-xs-3 row-centered movie'>
+  <div class='col-xs-3 row-centered movie wrapper'>
     <a href='#'>
-      <div class='thumbnail'>
-        <div class="wrapper"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></div>
+      <div class='thumbnail wrapper'>    
         <img src='{{Poster}}' alt='{{Title}}'>
-         <button type="button" class="btn btn-primary watched {{watched}}">Watched?</button>
-        </div>
+        <span class="glyphicon glyphicon-trash delete"></span>
+        <button type="button" class="btn btn-primary watched top-marg {{watched}}">Watched?</button>
+      </div>
     </a>
   </div>
 {{/unless}}

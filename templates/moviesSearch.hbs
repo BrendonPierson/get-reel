@@ -19,21 +19,12 @@
   </div>
 {{/if}}
 {{#unless watched}}
-  <div class='col-xs-3 row-centered movie'>
+  <div class='col-xs-3 row-centered movie wrapper'>
     <a href='#'>
-      <div class='thumbnail'>
+      <div class='thumbnail wrapper'>    
         <img src='{{Poster}}' alt='{{Title}}'>
-        <span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span>
-       {{!--  <div class='caption'>
-          <form class="form-inline">
-            <div class="form-group">
-              <label for="Rating">Rating: </label>
-              <input  type='hidden' class='myRating' data-start="0" data-stop="5" value={{rating}}>
-            </div>
-          </form>
-        </div> --}}
-        <button type="button" class="btn btn-default watched {{watched}}">Watched?</button>
-        <button type="button" class="btn btn-default delete">Delete This Movie</button>
+        <span class="glyphicon glyphicon-trash delete"></span>
+        <button type="button" class="btn btn-primary watched top-marg {{watched}}">Watched?</button>
       </div>
     </a>
   </div>
