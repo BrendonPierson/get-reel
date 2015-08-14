@@ -39,10 +39,9 @@ h1 {
 }
 
 .thumbnail {
-    // height: 700px;
+    height: 360px;
     font-family: "Overlock";
     font-weight: 400;
-    // padding: 10px;
 }
 
 a:hover {
@@ -71,6 +70,10 @@ a:hover {
   }
 }
 
+.top-marg {
+  margin-top: 10px;
+}
+
 // @media (min-width: 500px) and (max-width: 1000px) {
 //  .col-xs-4 { width: 50%; }
 //    .thumbnail {
@@ -85,6 +88,5 @@ a:hover {
 //    margin-right: auto;
 //    }
 // }
-
 
 
