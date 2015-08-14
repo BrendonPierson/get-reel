@@ -17,7 +17,8 @@
       </div>
     </a>
   </div>
-{{else if wished}}
+{{/if}}
+{{#if wished}}
   <div class='col-xs-3 row-centered movie wrapper'>
     <a href='#'>
       <div class='thumbnail wrapper'>    
@@ -27,10 +28,16 @@
       </div>
     </a>
   </div>
-{{else}}
-  <div class="col-xs-3 row-centered movie" id="{{@key}}">
-    <img src='{{Poster}}' alt='{{Title}}'>
-    <button id="addMovie" type="button" class="btn btn-primary btn-lg">Add</button>
+{{/if}}
+{{#if found}}
+    <div class='col-xs-3 row-centered movie wrapper'>
+    <a href='#'>
+      <div class='thumbnail wrapper' id="{{@key}}">    
+        <img src='{{Poster}}' alt='{{Title}}'>
+        <span class="glyphicon glyphicon-trash delete"></span>
+        <button id="addMovie" type="button" class="btn btn-primary btn-lg">Add</button>
+      </div>
+    </a>
   </div>
 {{/if}}
 {{/each}}

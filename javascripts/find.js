@@ -30,6 +30,9 @@ define(["jquery", "firebase", "populateHTML"], function ($, _firebase, populateH
           movieInfo[imdbId[k]] = {};
           movieInfo[imdbId[k]].Title = titles[k];
           movieInfo[imdbId[k]].Poster = posterLinks[k];
+          movieInfo[imdbId[k]].wished = false;
+          movieInfo[imdbId[k]].watched = false;
+          movieInfo[imdbId[k]].found = true;
         }
         console.log('movie info', movieInfo);
         $('#userInput').val('');

@@ -80,6 +80,7 @@ requirejs(
       CombinedfilteredArrayOfMovies[CombinedfilteredArrayOfMovies.length] = search.search(userInput, allMovies)[0];
       $("#userInput").val('');
       console.log("CombinedfilteredArrayOfMovies", CombinedfilteredArrayOfMovies);
+      populateHTML.putSearchInHTML(CombinedfilteredArrayOfMovies);
     });
 
 
