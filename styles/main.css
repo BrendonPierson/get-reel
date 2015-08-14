@@ -10,6 +10,10 @@ body {
   background-color: tomato;
   border-radius: 50%; }
 
+.wish {
+  border-radius: 50%;
+  background-color: lime; }
+
 .input {
   margin: 10px; }
 
