@@ -43,14 +43,18 @@ requirejs(
     for(var i = 0; i < allMoviesArray.length; i++){
       allMoviesTitles[allMoviesTitles.length] = allMoviesArray[i].Title;
     }
+
+    var sortedMovieArray = allMoviesArray.sort(function(a, b){
+      return a.Title - b.Title;
+    });
     //not sure what the allMoviesObject is for
     // var allMoviesObject = {movies: allMoviesArray};
 
     //put movies in html from firebase base on what page you are on
     if($(location).attr('pathname') === "/index.html"){
-      populateHTML.putWishListMoviesInHTML(allMovies);
+      populateHTML.putWishListMoviesInHTML(allMoviesArray);
     } else {
-      populateHTML.putWatchedMoviesInHTML(allMovies);  
+      populateHTML.putWatchedMoviesInHTML(allMoviesArray);  
     }
     
     

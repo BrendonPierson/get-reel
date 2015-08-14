@@ -2,9 +2,11 @@
 {{#unless watched}}
   <div class='col-xs-3 row-centered movie'>
     <a href='#'>
-      <div class='thumbnail'>
+      <div class='thumbnail wrapper'>
+        
         <img src='{{Poster}}' alt='{{Title}}'>
-        <span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-trash delete"></span>
+        
        {{!--  <div class='caption'>
           <form class="form-inline">
             <div class="form-group">
@@ -13,8 +15,8 @@
             </div>
           </form>
         </div> --}}
-        <button type="button" class="btn btn-default watched {{watched}}">Watched?</button>
-        <button type="button" class="btn btn-default delete">Delete This Movie</button>
+        <button type="button" class="btn btn-primary watched {{watched}}">Watched?</button>
+        {{!-- <button type="button" class="btn btn-default delete">Delete This Movie</button> --}}
       </div>
     </a>
   </div>
