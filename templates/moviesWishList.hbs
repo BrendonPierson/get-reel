@@ -2,31 +2,11 @@
 {{#unless watched}}
   <div class='col-xs-3 row-centered movie'>
     <a href='#'>
-<<<<<<< HEAD
       <div class='thumbnail'>
         <div class="wrapper"><span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span></div>
         <img src='{{Poster}}' alt='{{Title}}'>
-        
-        {{!-- <span class="glyphicon glyphicon-trash delete" aria-hidden="true" aria-label="right align"></span> --}}
-
-=======
-      <div class='thumbnail wrapper'>
-        
-        <img src='{{Poster}}' alt='{{Title}}'>
-        <span class="glyphicon glyphicon-trash delete"></span>
-        
->>>>>>> a01bd12c06676779de04c6ebc4bc5e4b412660a1
-       {{!--  <div class='caption'>
-          <form class="form-inline">
-            <div class="form-group">
-              <label for="Rating">Rating: </label>
-              <input  type='hidden' class='myRating' data-start="0" data-stop="5" value={{rating}}>
-            </div>
-          </form>
-        </div> --}}
-        <button type="button" class="btn btn-primary watched {{watched}}">Watched?</button>
-        {{!-- <button type="button" class="btn btn-default delete">Delete This Movie</button> --}}
-      </div>
+         <button type="button" class="btn btn-primary watched {{watched}}">Watched?</button>
+        </div>
     </a>
   </div>
 {{/unless}}
