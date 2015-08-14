@@ -5,6 +5,7 @@ define(["jquery", "firebase", "populateHTML"], function ($, _firebase, populateH
   var movieInfo = {};
   $(document).on("click", '#add-movie', function() {
     var userInput = $('#userInput').val().replace(/ /g, "+");
+    console.log("userInput: ", userInput);
     $.ajax({
       url: 'http://www.omdbapi.com/?s=' + userInput,
       method: 'GET',
@@ -23,14 +24,15 @@ define(["jquery", "firebase", "populateHTML"], function ($, _firebase, populateH
           posterLinks.push(data.Poster);
         });
       }
-      for (var k = 0; k < imdbId.length; k++) {
+      for (var k = 0; k < imdbId.length; k++) {        
         movieInfo[imdbId[k]] = {};
         movieInfo[imdbId[k]].Title = titles[k];
         movieInfo[imdbId[k]].Poster = posterLinks[k];
       }
-      console.log(movieInfo);
+      console.log('movie info', movieInfo);
 
       populateHTML.putFindInHTML(movieInfo);
+      $('#userInput').val('');
     });//end of ajax id and poster calls
   });//end of find click
 });//end of module
