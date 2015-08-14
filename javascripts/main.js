@@ -124,7 +124,7 @@ requirejs(
   //rating updatefunction
   $('.myRating').rating();
 
-  $('body').on('change','input', function (e) {
+  $('body').on('change','input[class="myRating"]', function (e) {
   var userRating = $(this).attr('value');
   var ratingTitle = $(this).parent().parent().parent().siblings().attr('alt');
   var titleKey = _.findKey(allMovies, {'Title': ratingTitle});
