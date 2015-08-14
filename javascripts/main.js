@@ -83,6 +83,24 @@ requirejs(
 
   }); // End of Firebase snapshot
   
+
+  $(".modal").on('click', "#addMovie",function(){
+    $.ajax({
+      url: 'http://www.omdbapi.com/?i=' + $(this).parent().attr('id') + '&plot=short&r=json',
+    }).done(function(data) {
+        data.watched = false;
+        data.rating = "Not rated";
+        console.log(data);
+        myFirebaseRef.push(data); 
+        $("body").removeClass("modal-open");    
+        $("#myModal").slideUp('slow'); 
+        $("#myModal").modal('hide');
+      });
+  });
+
+
+
+
   // On clicking "Spin the Reel": (consider moving this function to module?)
   $('#movie-search').click(function () {
     // Close form: (possible modification - on click, hidden div displays with the movie info asking to confirm the selection.)
@@ -99,6 +117,7 @@ requirejs(
         data.rating = "Not rated";
         console.log(data);
         myFirebaseRef.push(data);
+
     });
   });
 
