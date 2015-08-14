@@ -1,19 +1,41 @@
 {{#each this}}
-   <div class='col-xs-3 row-centered movie'>
-       <a href='#'>
-           <div class='thumbnail'>
-               <img src='{{Poster}}' alt='{{Title}}'>
-               <div class='caption'>
-                   <form class="form-inline">
-                    <div class="form-group">
-                      <label for="Rating">Rating: </label>
-                      <input  type='hidden' class='myRating' data-start="0" data-stop="5" value={{rating}}>
-                    </div>
-                  </form>
-               </div>
-               <button type="button" class="btn btn-default watched {{watched}}"></button>
-               <button type="button" class="btn btn-default delete">Delete This Movie</button>
-           </div>
-       </a>
-   </div>
+{{#if watched}}
+  <div class='col-xs-3 row-centered movie'>
+    <a href='#'>
+      <div class='thumbnail'>
+        <img src='{{Poster}}' alt='{{Title}}'>
+        <div class='caption'>
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="Rating">Rating: </label>
+              <input  type='hidden' class='myRating' data-start="0" data-stop="5" value={{rating}}>
+            </div>
+          </form>
+        </div>
+        {{!-- <button type="button" class="btn btn-default watched {{watched}}"></button>
+        <button type="button" class="btn btn-default delete">Delete This Movie</button> --}}
+      </div>
+    </a>
+  </div>
+{{/if}}
+{{#unless watched}}
+  <div class='col-xs-3 row-centered movie'>
+    <a href='#'>
+      <div class='thumbnail'>
+        <img src='{{Poster}}' alt='{{Title}}'>
+        <span class="glyphicon glyphicon-trash delete" aria-hidden="true"></span>
+       {{!--  <div class='caption'>
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="Rating">Rating: </label>
+              <input  type='hidden' class='myRating' data-start="0" data-stop="5" value={{rating}}>
+            </div>
+          </form>
+        </div> --}}
+        <button type="button" class="btn btn-default watched {{watched}}">Watched?</button>
+        <button type="button" class="btn btn-default delete">Delete This Movie</button>
+      </div>
+    </a>
+  </div>
+{{/unless}}
 {{/each}}

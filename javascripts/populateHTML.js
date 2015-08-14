@@ -4,6 +4,7 @@ define(["jquery", "hbs"], function($, Handlebars){
         console.log("data", data);
         require(['hbs!../templates/moviesWatched'],function(movieTemplate){
           $("#moviesDiv").html(movieTemplate(data));
+          $('.myRating').rating();
         });
       },
       putWishListMoviesInHTML: function(data) {
@@ -13,7 +14,8 @@ define(["jquery", "hbs"], function($, Handlebars){
       },
       putSearchInHTML: function(data) {
         require(['hbs!../templates/moviesSearch'],function(movieTemplate){
-          // $(DIV TO PUT DATA).html(movieTemplate(data));
+          $("#moviesDiv").html(movieTemplate(data));
+          $('.myRating').rating();
         });
       },
       putFindInHTML: function(data) {
