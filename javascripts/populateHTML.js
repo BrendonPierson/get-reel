@@ -28,7 +28,7 @@ define(["jquery", "hbs"], function($, Handlebars){
       },
       putFindInHTML: function(data) {
         require(['hbs!../templates/moviesFind'],function(movieTemplate){
-          // $(DIV TO PUT DATA).html(movieTemplate(data));
+          $("#findResults").html(movieTemplate(data));
         });
       },
       alphabetize: function(dataArray) {
