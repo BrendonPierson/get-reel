@@ -19,8 +19,8 @@ requirejs.config({
   }
 });
 requirejs(
-  ["firebase", "jquery","jqueryui", "lodash", "hbs", "bootstrap", "delete", "watched", "rating", "rating2", "find", "populateHTML", "search"],
-  function(_firebase, $, jqueryUI, _, Handlebars, bootstrap, deleter, watched, rating, rating2, find, populateHTML, search) {
+  ["firebase", "jquery","jqueryui", "lodash", "hbs", "bootstrap", "delete", "watched", "rating", "rating2", "find", "populateHTML", "search", "filter"],
+  function(_firebase, $, jqueryUI, _, Handlebars, bootstrap, deleter, watched, rating, rating2, find, populateHTML, search, filter) {
     var myFirebaseRef = new Firebase('https://get-reel.firebaseio.com/');
 
     // Declare allMovies for require scope
@@ -54,6 +54,7 @@ requirejs(
 
     var sortedMovieArray = allMoviesArray.sort(compare);
 
+    filter.displayWatched(sortedMovieArray);
     // populateHTML.alphabetize(allMoviesArray);
 
     //not sure what the allMoviesObject is for
