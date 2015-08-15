@@ -33,7 +33,7 @@ define(["jquery", "hbs"], function($, Handlebars){
         });
       },
       alphabetize: function(dataArray) {
-        var sortedMovieArray = dataArray.sort(compare);
+        return dataArray.sort(compare);
       }    
     };
   }

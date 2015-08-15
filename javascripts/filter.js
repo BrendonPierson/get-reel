@@ -11,6 +11,7 @@ define(["jquery", "populateHTML"],function($, populateHTML){
         }
       } 
       console.log("moviesWatched: ", moviesWatched);
+      populateHTML.putWatchedMoviesInHTML(moviesWatched);
       return moviesWatched; 
     },
     displayWished: function(data){
@@ -20,6 +21,7 @@ define(["jquery", "populateHTML"],function($, populateHTML){
         }
       } 
       console.log("moviesWished: ", moviesWished);
+      populateHTML.putWishListMoviesInHTML(moviesWished);
       return moviesWished; 
     },
     displayToAdd: function(data){
@@ -29,6 +31,7 @@ define(["jquery", "populateHTML"],function($, populateHTML){
         }
       } 
       console.log("moviesToAdd: ", moviesToAdd);
+      populateHTML.putSearchInHTML(moviesToAdd);
       return moviesToAdd; 
     },
   };// end of return
