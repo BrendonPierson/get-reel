@@ -1,11 +1,10 @@
 //take an object of movies and filter it based on criteria
 define(["jquery", "populateHTML", "dom-access"],function($, populateHTML, D){
-  var moviesWatched = [];
-  var moviesWished = [];
-  var moviesToAdd = [];
+
   return {
     displayWatched: function(data){
-      D.filterButtons.remove();
+      var moviesWatched = [];
+      $("#filterButtons").remove();
       for(var i = 0; i < data.length; i++){
         if(data[i].watched === true) {
           moviesWatched[moviesWatched.length] = data[i];
@@ -13,11 +12,12 @@ define(["jquery", "populateHTML", "dom-access"],function($, populateHTML, D){
       } 
       console.log("moviesWatched: ", moviesWatched);
       populateHTML.putWatchedMoviesInHTML(moviesWatched);
-      D.moviesDiv.before('<div id="filterButtons" class="btn-group" role="group"><button type="button" class="btn btn-primary" value="displayWatched">Watched</button><button type="button" class="btn btn-primary" value="displayWished">Wished</button><button type="button" class="btn btn-primary" value="displayToAdd">To Add</button></div>');
+      $("#moviesDiv").before('<div id="filterButtons" class="btn-group" role="group"><button type="button" class="btn btn-primary" value="displayWatched">Watched</button><button type="button" class="btn btn-primary" value="displayWished">Wished</button><button type="button" class="btn btn-primary" value="displayToAdd">To Add</button></div>');
       return moviesWatched; 
     },
     displayWished: function(data){
-      D.filterButtons.remove();
+      var moviesWished = [];
+      $("#filterButtons").remove();
       for(var i = 0; i < data.length; i++){
         if(data[i].wished === true) {
           moviesWished[moviesWished.length] = data[i];
@@ -30,13 +30,15 @@ define(["jquery", "populateHTML", "dom-access"],function($, populateHTML, D){
       return moviesWished; 
     },
     displayToAdd: function(data){
-      D.filterButtons.remove();
+      var moviesToAdd = [];
+      $("#filterButtons").remove();
       for(var i = 0; i < data.length; i++){
         if(data[i].wished === false && data[i].watched === false ) {
           moviesToAdd[moviesToAdd.length] = data[i];
         }
       } 
       console.log("moviesToAdd: ", moviesToAdd);
+      
       populateHTML.putSearchInHTML(moviesToAdd);
       return moviesToAdd; 
     },

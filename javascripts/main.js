@@ -63,9 +63,14 @@ requirejs(
     
     //////////DOM EVENT HANDLERS//////////
     //search function
-    var uniqueMoviesArray;
+    var uniqueMoviesArrayCopy = [];
     $('button[type="submit"]').click(function(e){
+      console.log("uniqueMoviesArray", uniqueMoviesArray);
+      console.log("uniqueMoviesArrayCopy", uniqueMoviesArrayCopy);
+      console.log("combinedArrayOfMovies", combinedArrayOfMovies);
+      // console.log("uniqueMoviesArray", uniqueMoviesArray);
       var combinedArrayOfMovies=[];
+      var uniqueMoviesArray = [];
       e.preventDefault();
       var userInput = $("#userInput").val();
       var foundMovies = find.findMovies(userInput);
@@ -80,17 +85,20 @@ requirejs(
       console.log("uniqueMoviesArray", uniqueMoviesArray);
       $("#userInput").val('');
       populateHTML.putSearchInHTML(uniqueMoviesArray);
+      uniqueMoviesArrayCopy = uniqueMoviesArray.slice();
+      uniqueMoviesArray = [];
+      combinedArrayOfMovies = [];
     });//end search function
 
   //search results filters 
     D.body.on('click', 'button[value="displayWatched"]', function(){
-      filter.displayWatched(uniqueMoviesArray);
+      filter.displayWatched(uniqueMoviesArrayCopy);
     });
     D.body.on('click', 'button[value="displayWished"]', function(){
-      filter.displayWished(uniqueMoviesArray);
+      filter.displayWished(uniqueMoviesArrayCopy);
     });
     D.body.on('click', 'button[value="displayToAdd"]', function(){
-      filter.displayToAdd(uniqueMoviesArray);
+      filter.displayToAdd(uniqueMoviesArrayCopy);
     });
 
   }); // End of Firebase snapshot
@@ -119,8 +127,6 @@ requirejs(
   D.moviesDiv.on('click', '.watched', function (e){
     editMovies.watched(e, allMovies, $(this).siblings().attr('alt'));
   });
-
-
 
 }); //end require
 

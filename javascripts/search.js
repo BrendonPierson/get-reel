@@ -9,7 +9,6 @@ define(["jquery", "hbs", "populateHTML", "lodash"], function($, Handlebars, popu
       //   }
       // }
 
-
       //looks at all attributes of the film
       for(var key in data) {
         var textLow = [];
