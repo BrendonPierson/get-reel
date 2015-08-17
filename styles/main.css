@@ -3,8 +3,15 @@ body {
   background-image: url("../movie-reel-wallpaper-border-hd-widescreen-11.png"); }
 
 .navbar {
-  height: 135px;
-  background-color: rgba(0, 0, 0, 0.7); }
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 2% 0; }
+
+.navbar-nav {
+  background-color: tomato;
+  border-radius: 50%; }
+
+.input {
+  margin: 10px; }
 
 h1 {
   display: inline-block;
@@ -21,19 +28,10 @@ h1 {
   text-shadow: 2px 2px #286090;
   color: white; }
 
-#add-movie {
-  float: right;
-  margin-top: 50px;
-  width: 30%;
-  font-family: "Overlock";
-  font-weight: 400;
-  font-size: 24px; }
-
 .thumbnail {
-  height: 700px;
+  height: 360px;
   font-family: "Overlock";
-  font-weight: 400;
-  padding: 10px; }
+  font-weight: 400; }
 
 a:hover {
   text-decoration: none; }
@@ -41,19 +39,42 @@ a:hover {
 .hidden {
   display: none; }
 
-@media (min-width: 500px) and (max-width: 1000px) {
-  .col-xs-4 {
-    width: 50%; }
+.wrapper {
+  display: relative; }
+
+.wrapper .glyphicon {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.5em;
+  color: white;
+  padding: 10px;
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0.2); }
+  .wrapper .glyphicon:hover {
+    background-color: #000; }
+
+.top-marg {
+  display: block;
+  margin: 10px auto 0 auto;
+  width: 100%; }
+
+.nav {
+  font-weight: 900;
+  color: #000; }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .thumbnail {
+    height: 270px;
+    font-family: "Overlock";
+    font-weight: 400; } }
+@media (max-width: 767px) {
+  [class*="col-"] {
+    width: 100%; }
 
   .thumbnail {
-    margin-left: auto;
-    margin-right: auto; } }
-@media (max-width: 500px) {
-  .col-xs-4 {
-    width: 80%; }
-
-  .thumbnail {
-    margin-left: auto;
-    margin-right: auto; } }
+    height: 450px;
+    font-family: "Overlock";
+    font-weight: 400; } }
 
 /*# sourceMappingURL=main.css.map */

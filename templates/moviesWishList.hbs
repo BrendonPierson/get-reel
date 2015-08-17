@@ -1,0 +1,13 @@
+{{#each this}}
+{{#unless watched}}
+  <div class='col-xs-3 row-centered movie wrapper'>
+    <a href='#'>
+      <div class='thumbnail wrapper'>    
+        <img src='{{Poster}}' alt='{{Title}}'>
+        <span class="glyphicon glyphicon-trash delete"></span>
+        <button type="button" class="btn btn-primary watched top-marg {{watched}}">Watched?</button>
+      </div>
+    </a>
+  </div>
+{{/unless}}
+{{/each}}

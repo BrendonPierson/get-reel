@@ -1,0 +1,49 @@
+<div class="btn-group" role="group">
+  <button type="button" class="btn btn-primary" value="displayWatched">Watched</button>
+  <button type="button" class="btn btn-primary" value="displayWished">Wished</button>
+  <button type="button" class="btn btn-primary" value="displayToAdd">To Add</button>
+</div>
+
+{{#each this}}
+{{#if watched}}
+  <div class='col-xs-3 row-centered movie'>
+    <a href='#'>
+      <div class='thumbnail'>
+        <img src='{{Poster}}' alt='{{Title}}'>
+        <div class='caption'>
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="Rating">Rating: </label>
+              <input  type='hidden' class='myRating' data-start="0" data-stop="5" value={{rating}}>
+            </div>
+          </form>
+        </div>
+        {{!-- <button type="button" class="btn btn-default watched {{watched}}"></button>
+        <button type="button" class="btn btn-default delete">Delete This Movie</button> --}}
+      </div>
+    </a>
+  </div>
+{{/if}}
+{{#if wished}}
+  <div class='col-xs-3 row-centered movie wrapper'>
+    <a href='#'>
+      <div class='thumbnail wrapper'>    
+        <img src='{{Poster}}' alt='{{Title}}'>
+        <span class="glyphicon glyphicon-trash delete"></span>
+        <button type="button" class="btn btn-primary watched top-marg {{watched}}">Watched?</button>
+      </div>
+    </a>
+  </div>
+{{/if}}
+{{#if found}}
+    <div class='col-xs-3 row-centered movie wrapper'>
+    <a href='#'>
+      <div class='thumbnail wrapper' id="{{@key}}">    
+        <img src='{{Poster}}' alt='{{Title}}'>
+        <span class="glyphicon glyphicon-trash delete"></span>
+        <button id="addMovie" type="button" class="btn btn-primary btn-lg">Add</button>
+      </div>
+    </a>
+  </div>
+{{/if}}
+{{/each}}
