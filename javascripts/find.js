@@ -40,6 +40,12 @@ define(["jquery", "firebase", "populateHTML"], function ($, _firebase, populateH
         
       });//end of ajax done calls
       return movieInfo;
-    }//end Function
+    },//end Function
+    resetVariables: function() {
+      imdbId.length = 0;
+      posterLinks.length = 0;
+      titles.length = 0;
+      movieInfo = {};
+    }
   }; //end return 
 });//end of module

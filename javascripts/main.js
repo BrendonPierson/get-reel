@@ -64,15 +64,20 @@ requirejs(
     //////////DOM EVENT HANDLERS//////////
     //search function
     var uniqueMoviesArrayCopy = [];
+    var uniqueMoviesArray = [];
     $('button[type="submit"]').click(function(e){
+      e.preventDefault();
       console.log("uniqueMoviesArray", uniqueMoviesArray);
       console.log("uniqueMoviesArrayCopy", uniqueMoviesArrayCopy);
       console.log("combinedArrayOfMovies", combinedArrayOfMovies);
       // console.log("uniqueMoviesArray", uniqueMoviesArray);
+      
       var combinedArrayOfMovies=[];
       var uniqueMoviesArray = [];
-      e.preventDefault();
+      combinedArrayOfMovies.length = 0;
+      uniqueMoviesArray.length = 0;
       var userInput = $("#userInput").val();
+      find.resetVariables();
       var foundMovies = find.findMovies(userInput);
       var searchedMovies = search.search(userInput, allMovies);
       for (var i = 0; i < searchedMovies.length; i++) {
@@ -82,11 +87,11 @@ requirejs(
         combinedArrayOfMovies[combinedArrayOfMovies.length] = foundMovies[key];
       }
       uniqueMoviesArray = _.chain(combinedArrayOfMovies).uniq('Title').sortBy('Title').value();
-      console.log("uniqueMoviesArray", uniqueMoviesArray);
+      console.log("uniqueMoviesArray after populating", uniqueMoviesArray);
       $("#userInput").val('');
       populateHTML.putSearchInHTML(uniqueMoviesArray);
       uniqueMoviesArrayCopy = uniqueMoviesArray.slice();
-      uniqueMoviesArray = [];
+      // uniqueMoviesArray.length = 0;
       combinedArrayOfMovies = [];
     });//end search function
 
