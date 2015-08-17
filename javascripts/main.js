@@ -27,7 +27,7 @@ requirejs(
     var allMovies = {};
 
     myFirebaseRef.on("value", function(snapshot) {
-      console.log(snapshot.val());
+      console.log("Data snapshot from Firebase", snapshot.val());
       allMovies = snapshot.val();
 
     var allMoviesArray = [];
@@ -44,15 +44,7 @@ requirejs(
       allMoviesTitles[allMoviesTitles.length] = allMoviesArray[i].Title;
     }
 
-    function compare(a,b) {
-      if (a.Title < b.Title)
-        return -1;
-      if (a.Title > b.Title)
-        return 1;
-      return 0;
-    }
-
-    var sortedMovieArray = allMoviesArray.sort(compare);
+    var sortedMovieArray = populateHTML.alphabetize(allMoviesArray);
 
     D.body.on('click', 'button[value="displayWatched"]', function(){
       filter.displayWatched(sortedMovieArray);
@@ -63,7 +55,6 @@ requirejs(
     D.body.on('click', 'button[value="displayToAdd"]', function(){
       filter.displayToAdd(sortedMovieArray);
     });
-    // populateHTML.alphabetize(allMoviesArray);
 
     //not sure what the allMoviesObject is for
     // var allMoviesObject = {movies: allMoviesArray};
@@ -103,9 +94,11 @@ requirejs(
   }); // End of Firebase snapshot
   
 
-  $(".modal").on('click', "#addMovie",function(){
+  $("#moviesDiv").on('click', "#addMovie",function(){
+    console.log("add movie button pressed");
+    console.log($(this).siblings().attr('alt'));
     $.ajax({
-      url: 'http://www.omdbapi.com/?i=' + $(this).parent().attr('id') + '&plot=short&r=json',
+      url: 'http://www.omdbapi.com/?t=' + $(this).siblings().attr('alt') + '&plot=short&r=json',
     }).done(function(data) {
         data.watched = false;
         data.rating = "Not rated";
