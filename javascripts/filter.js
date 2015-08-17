@@ -12,7 +12,7 @@ define(["jquery", "populateHTML", "dom-access"],function($, populateHTML, D){
       } 
       console.log("moviesWatched: ", moviesWatched);
       populateHTML.putWatchedMoviesInHTML(moviesWatched);
-      $("#moviesDiv").before('<div id="filterButtons" class="btn-group" role="group"><button type="button" class="btn btn-primary" value="displayWatched">Watched</button><button type="button" class="btn btn-primary" value="displayWished">Wished</button><button type="button" class="btn btn-primary" value="displayToAdd">To Add</button></div>');
+      $("#moviesDiv").before('<div id="filterButtons" class="btn-group bot-marg" role="group"><button type="button" class="btn btn-primary" value="displayWatched">Watched</button><button type="button" class="btn btn-primary" value="displayWished">Wished</button><button type="button" class="btn btn-primary" value="displayToAdd">To Add</button></div>');
       return moviesWatched; 
     },
     displayWished: function(data){
@@ -25,7 +25,7 @@ define(["jquery", "populateHTML", "dom-access"],function($, populateHTML, D){
       } 
       console.log("moviesWished: ", moviesWished);
       populateHTML.putWishListMoviesInHTML(moviesWished);
-      D.moviesDiv.before('<div id="filterButtons" class="btn-group" role="group"><button type="button" class="btn btn-primary" value="displayWatched">Watched</button><button type="button" class="btn btn-primary" value="displayWished">Wished</button><button type="button" class="btn btn-primary" value="displayToAdd">To Add</button></div>');
+      $("#moviesDiv").before('<div id="filterButtons" class="btn-group bot-marg" role="group"><button type="button" class="btn btn-primary" value="displayWatched">Watched</button><button type="button" class="btn btn-primary" value="displayWished">Wished</button><button type="button" class="btn btn-primary" value="displayToAdd">To Add</button></div>');
 
       return moviesWished; 
     },
