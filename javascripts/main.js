@@ -31,58 +31,52 @@ requirejs(
       allMovies = snapshot.val();
 
     var allMoviesArray = [];
-    var allMoviesTitles = [];
 
-   
     //make array of firebase movie objects
     for (var key in allMovies) {
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
-
-    //create array of movie titles
-    for(var i = 0; i < allMoviesArray.length; i++){
-      allMoviesTitles[allMoviesTitles.length] = allMoviesArray[i].Title;
-    }
-
+    //sort movies alphabetically
     var sortedMovieArray = populateHTML.alphabetize(allMoviesArray);
 
-    //not sure what the allMoviesObject is for
-    // var allMoviesObject = {movies: allMoviesArray};
-
-    //put movies in html from firebase base on what page you are on
+    //put movies in html from firebase based on what page you are on
     if($(location).attr('pathname') === "/index.html"){
       populateHTML.putWishListMoviesInHTML(sortedMovieArray);
     } else {
       populateHTML.putWatchedMoviesInHTML(sortedMovieArray);  
     }
-    
-    //autocomplete function
+
+    //autocomplete function using all strings in movie objects
     $("#userInput").autocomplete({
-      source: allMoviesTitles
+      source: search.autocompleteSource(sortedMovieArray)
     });
     
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    
     //////////DOM EVENT HANDLERS//////////
-    //search function
-    var uniqueMoviesArray;
+    //search function takes user input and displays results from firebase and OMDB
+    var uniqueMoviesArray = [];
     $('button[type="submit"]').click(function(e){
-      var combinedArrayOfMovies=[];
       e.preventDefault();
+      $("#userInput").autocomplete( "close" );
+      var combinedArrayOfMovies=[];
       var userInput = $("#userInput").val();
+      find.resetVariables(); //resets all variables in find.js module
       var foundMovies = find.findMovies(userInput);
       var searchedMovies = search.search(userInput, allMovies);
+      //for loops used to create an array of movie matches from firebase and OMDB
       for (var i = 0; i < searchedMovies.length; i++) {
         combinedArrayOfMovies[combinedArrayOfMovies.length] = searchedMovies[i];
       }
       for (var key in foundMovies) {
         combinedArrayOfMovies[combinedArrayOfMovies.length] = foundMovies[key];
       }
+      //use lodash to remove duplicates and sort by title alphabetically
       uniqueMoviesArray = _.chain(combinedArrayOfMovies).uniq('Title').sortBy('Title').value();
-      console.log("uniqueMoviesArray", uniqueMoviesArray);
-      $("#userInput").val('');
+      $("#userInput").val(''); //reset user input field
       populateHTML.putSearchInHTML(uniqueMoviesArray);
-
-      //consider switching search to incorporate valuesIn, to look at more than the title
-      //console.log("movies array valuesIn", _.valuesIn(sortedMovieArray[0]));
     });//end search function
 
   //search results filters 
@@ -98,7 +92,8 @@ requirejs(
 
   }); // End of Firebase snapshot
   
-  //add movie to database
+  //////////Edit Firebase Database Functions/////////
+  //add movie to database function
   D.moviesDiv.on('click', "#addMovie",function(){
     editMovies.add($(this).siblings().attr('alt'), myFirebaseRef);
   });
@@ -122,8 +117,6 @@ requirejs(
   D.moviesDiv.on('click', '.watched', function (e){
     editMovies.watched(e, allMovies, $(this).siblings().attr('alt'));
   });
-
-
 
 }); //end require
 

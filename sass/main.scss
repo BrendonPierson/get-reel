@@ -14,6 +14,12 @@ body {
 .navbar-nav {
     background-color: tomato;
     border-radius: 50%;
+
+}
+
+.wish {
+    border-radius: 50%;
+    background-color: lime;
 }
 
 .input {
@@ -39,7 +45,11 @@ h1 {
 }
 
 .thumbnail {
+<<<<<<< HEAD
     min-height: 447px;
+=======
+    height: 365px;
+>>>>>>> d3247714ca11321e138e80c9761d6af516c3db03
     font-family: "Overlock";
     font-weight: 400;
     min-width: 100%;
@@ -79,6 +89,12 @@ a:hover {
   margin: 10px auto 0 auto;
   width: 100%;
 }
+.bot-marg {
+  margin-bottom: 20px;
+}
+.left-pad {
+  padding-left: 15px;
+}
 .nav {
     font-weight: 900;
     color: #000;
@@ -86,8 +102,14 @@ a:hover {
 
 @media (min-width: 768px) and (max-width: 991px) {
   .thumbnail {
+<<<<<<< HEAD
     min-height: 369px;
     
+=======
+    height: 280px;
+    font-family: "Overlock";
+    font-weight: 400;
+>>>>>>> d3247714ca11321e138e80c9761d6af516c3db03
   }
 }
 

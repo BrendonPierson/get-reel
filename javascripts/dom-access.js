@@ -2,6 +2,7 @@ define(["jquery"], function($){
   return {
     body: $("body"),
     moviesDiv: $("#moviesDiv"),
+    filterButtons: $("#filterButtons"),
     moviesSeenDiv: $("#moviesSeen"),
     moviesToSee: $("#moviesToSee"),
     moviesToAdd: $("#moviesToAdd"),

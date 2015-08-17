@@ -10,6 +10,10 @@ body {
   background-color: tomato;
   border-radius: 50%; }
 
+.wish {
+  border-radius: 50%;
+  background-color: lime; }
+
 .input {
   margin: 10px; }
 
@@ -29,8 +33,12 @@ h1 {
   color: white; }
 
 .thumbnail {
+<<<<<<< HEAD
   /*height: 360px;*/
   min-height: 447px;
+=======
+  height: 365px;
+>>>>>>> d3247714ca11321e138e80c9761d6af516c3db03
   font-family: "Overlock";
   font-weight: 400;
   min-width: 100%;
@@ -62,6 +70,12 @@ a:hover {
   margin: 10px auto 0 auto;
   width: 100%; }
 
+.bot-marg {
+  margin-bottom: 20px; }
+
+.left-pad {
+  padding-left: 15px; }
+
 .nav {
   font-weight: 900;
   color: #000; }
@@ -73,10 +87,17 @@ a:hover {
 
 @media (min-width: 768px) and (max-width: 991px) {
   .thumbnail {
+<<<<<<< HEAD
     min-height: 283px;
     }
 
 @media (min-width: 991px) {
+=======
+    height: 280px;
+    font-family: "Overlock";
+    font-weight: 400; } }
+@media (max-width: 767px) {
+>>>>>>> d3247714ca11321e138e80c9761d6af516c3db03
   [class*="col-"] {
     width: 100%; }
 
