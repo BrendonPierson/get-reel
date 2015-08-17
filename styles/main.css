@@ -59,6 +59,9 @@ a:hover {
   margin: 10px auto 0 auto;
   width: 100%; }
 
+.bot-marg {
+  margin-bottom: 20px; }
+
 .nav {
   font-weight: 900;
   color: #000; }
