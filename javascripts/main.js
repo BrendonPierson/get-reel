@@ -63,6 +63,7 @@ requirejs(
     
     //////////DOM EVENT HANDLERS//////////
     //search function
+    var uniqueMoviesArray;
     $('button[type="submit"]').click(function(e){
       var combinedArrayOfMovies=[];
       e.preventDefault();
@@ -75,7 +76,7 @@ requirejs(
       for (var key in foundMovies) {
         combinedArrayOfMovies[combinedArrayOfMovies.length] = foundMovies[key];
       }
-      var uniqueMoviesArray = _.chain(combinedArrayOfMovies).uniq('Title').sortBy('Title').value();
+      uniqueMoviesArray = _.chain(combinedArrayOfMovies).uniq('Title').sortBy('Title').value();
       console.log("uniqueMoviesArray", uniqueMoviesArray);
       $("#userInput").val('');
       populateHTML.putSearchInHTML(uniqueMoviesArray);
@@ -83,6 +84,17 @@ requirejs(
       //consider switching search to incorporate valuesIn, to look at more than the title
       //console.log("movies array valuesIn", _.valuesIn(sortedMovieArray[0]));
     });//end search function
+
+  //search results filters 
+    D.body.on('click', 'button[value="displayWatched"]', function(){
+      filter.displayWatched(uniqueMoviesArray);
+    });
+    D.body.on('click', 'button[value="displayWished"]', function(){
+      filter.displayWished(uniqueMoviesArray);
+    });
+    D.body.on('click', 'button[value="displayToAdd"]', function(){
+      filter.displayToAdd(uniqueMoviesArray);
+    });
 
   }); // End of Firebase snapshot
   
@@ -111,16 +123,7 @@ requirejs(
     editMovies.watched(e, allMovies, $(this).siblings().attr('alt'));
   });
 
-  //search results filters 
-    D.body.on('click', 'button[value="displayWatched"]', function(){
-      filter.displayWatched(sortedMovieArray);
-    });
-    D.body.on('click', 'button[value="displayWished"]', function(){
-      filter.displayWished(sortedMovieArray);
-    });
-    D.body.on('click', 'button[value="displayToAdd"]', function(){
-      filter.displayToAdd(sortedMovieArray);
-    });
+
 
 }); //end require
 
