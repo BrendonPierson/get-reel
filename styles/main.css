@@ -29,9 +29,12 @@ h1 {
   color: white; }
 
 .thumbnail {
-  height: 360px;
+  /*height: 360px;*/
+  min-height: 447px;
   font-family: "Overlock";
-  font-weight: 400; }
+  font-weight: 400;
+  min-width: 100%;
+   }
 
 a:hover {
   text-decoration: none; }
@@ -63,18 +66,24 @@ a:hover {
   font-weight: 900;
   color: #000; }
 
+@media (min-width: 768px) and (max-width: 1200px) {
+  .thumbnail {
+    min-height: 369px;
+    }
+
 @media (min-width: 768px) and (max-width: 991px) {
   .thumbnail {
-    height: 270px;
-    font-family: "Overlock";
-    font-weight: 400; } }
-@media (max-width: 767px) {
+    min-height: 283px;
+    }
+
+@media (min-width: 991px) {
   [class*="col-"] {
     width: 100%; }
 
   .thumbnail {
-    height: 450px;
-    font-family: "Overlock";
-    font-weight: 400; } }
+    min-height: 447px;
+    min-width: 30%;
+ } 
+}
 
 /*# sourceMappingURL=main.css.map */

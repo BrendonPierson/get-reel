@@ -39,9 +39,10 @@ h1 {
 }
 
 .thumbnail {
-    height: 360px;
+    min-height: 447px;
     font-family: "Overlock";
     font-weight: 400;
+    min-width: 100%;
 }
 
 a:hover {
@@ -54,7 +55,10 @@ a:hover {
 
 .wrapper {
 
-   display: relative;
+   display: fixed;
+   padding-bottom: 15px;
+   overflow: hidden;
+
 }
 
 .wrapper .glyphicon {
@@ -82,22 +86,45 @@ a:hover {
 
 @media (min-width: 768px) and (max-width: 991px) {
   .thumbnail {
-    height: 270px;
-    font-family: "Overlock";
-    font-weight: 400;
+    min-height: 369px;
+    
   }
 }
 
-@media (max-width: 767px) {
-  [class*="col-"] {
-      width: 100%;
-  }
-  .thumbnail {
-    height: 450px;
-    font-family: "Overlock";
-    font-weight: 400;
-  }
-}
+// @media (max-width: 767px) {
+//   [class*="col-"] {
+//       width: 100%;
+//   }
+//   .thumbnail {
+//     height: 450px;
+//     font-family: "Overlock";
+//     font-weight: 400;
+//   }
+// }
+
+// @media (max-width: 315px) {
+//   [class*="col-"] {
+//       width: 100%;
+//   }
+//   .thumbnail {
+//     height: 480px;
+//     font-family: "Overlock";
+//     font-weight: 400;
+    
+//   }
+// }
+
+// @media (max-width: 1195px) {
+//   [class*="col-"] {
+//       width: 100%;
+//   }
+//   .thumbnail {
+//     height: 480px;
+//     font-family: "Overlock";
+//     font-weight: 400;
+//     resize: horizontal
+//   }
+// }
 
 // @media (min-width: 500px) and (max-width: 1000px) {
 //  .col-xs-4 { width: 50%; }
