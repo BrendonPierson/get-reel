@@ -3,7 +3,7 @@ define(["jquery", "hbs", "populateHTML"], function($, Handlebars, populateHTML){
     search: function(userInput, data){
       filteredMovies = [];
       for(var key in data) {
-        if(data[key].Title.toLowerCase() === userInput.toLowerCase()){
+        if(data[key].Title.toLowerCase().indexOf(userInput.toLowerCase()) > -1){
           filteredMovies[filteredMovies.length] = data[key];
         }
       }

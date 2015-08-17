@@ -70,21 +70,25 @@ requirejs(
     
     //////////DOM EVENT HANDLERS//////////
     $('button[type="submit"]').click(function(e){
-      var CombinedfilteredArrayOfMovies=[];
+      var combinedArrayOfMovies=[];
       e.preventDefault();
       var userInput = $("#userInput").val();
       var foundMovies = find.findMovies(userInput);
-      for (key in foundMovies) {
-        CombinedfilteredArrayOfMovies[CombinedfilteredArrayOfMovies.length] = foundMovies[key];
+      var searchedMovies = search.search(userInput, allMovies);
+      for (var i = 0; i < searchedMovies.length; i++) {
+        combinedArrayOfMovies[combinedArrayOfMovies.length] = searchedMovies[i];
       }
-      CombinedfilteredArrayOfMovies[CombinedfilteredArrayOfMovies.length] = search.search(userInput, allMovies)[0];
+      for (var key in foundMovies) {
+        combinedArrayOfMovies[combinedArrayOfMovies.length] = foundMovies[key];
+      }
+      var uniqueMoviesArray = _.chain(combinedArrayOfMovies).uniq('Title').sortBy('Title').value();
+      console.log("uniqueMoviesArray", uniqueMoviesArray);
       $("#userInput").val('');
-      console.log("CombinedfilteredArrayOfMovies", CombinedfilteredArrayOfMovies);
-      populateHTML.putSearchInHTML(CombinedfilteredArrayOfMovies);
+      populateHTML.putSearchInHTML(uniqueMoviesArray);
     });
 
 
-
+// var uniqueArtists = _.chain(artistsArr).uniq().value();
     
    
     $("#userInput").autocomplete({
