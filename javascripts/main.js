@@ -31,84 +31,64 @@ requirejs(
       allMovies = snapshot.val();
 
     var allMoviesArray = [];
-    var allMoviesTitles = [];
 
-   
     //make array of firebase movie objects
     for (var key in allMovies) {
       allMoviesArray[allMoviesArray.length] = allMovies[key];
     }
-
-    //create array of movie titles
-    for(var i = 0; i < allMoviesArray.length; i++){
-      allMoviesTitles[allMoviesTitles.length] = allMoviesArray[i].Title;
-    }
-
+    //sort movies alphabetically
     var sortedMovieArray = populateHTML.alphabetize(allMoviesArray);
 
-    //not sure what the allMoviesObject is for
-    // var allMoviesObject = {movies: allMoviesArray};
-
-    //put movies in html from firebase base on what page you are on
+    //put movies in html from firebase based on what page you are on
     if($(location).attr('pathname') === "/index.html"){
       populateHTML.putWishListMoviesInHTML(sortedMovieArray);
     } else {
       populateHTML.putWatchedMoviesInHTML(sortedMovieArray);  
     }
 
-    //autocomplete function
+    //autocomplete function using all strings in movie objects
     $("#userInput").autocomplete({
       source: search.autocompleteSource(sortedMovieArray)
     });
     
     //////////DOM EVENT HANDLERS//////////
-    //search function
-    var uniqueMoviesArrayCopy = [];
+    //search function takes user input and displays results from firebase and OMDB
     var uniqueMoviesArray = [];
     $('button[type="submit"]').click(function(e){
       e.preventDefault();
-      console.log("uniqueMoviesArray", uniqueMoviesArray);
-      console.log("uniqueMoviesArrayCopy", uniqueMoviesArrayCopy);
-      console.log("combinedArrayOfMovies", combinedArrayOfMovies);
-      // console.log("uniqueMoviesArray", uniqueMoviesArray);
-      
       var combinedArrayOfMovies=[];
-      var uniqueMoviesArray = [];
-      combinedArrayOfMovies.length = 0;
-      uniqueMoviesArray.length = 0;
       var userInput = $("#userInput").val();
-      find.resetVariables();
+      find.resetVariables(); //resets all variables in find.js module
       var foundMovies = find.findMovies(userInput);
       var searchedMovies = search.search(userInput, allMovies);
+      //for loops used to create an array of movie matches from firebase and OMDB
       for (var i = 0; i < searchedMovies.length; i++) {
         combinedArrayOfMovies[combinedArrayOfMovies.length] = searchedMovies[i];
       }
       for (var key in foundMovies) {
         combinedArrayOfMovies[combinedArrayOfMovies.length] = foundMovies[key];
       }
+      //use lodash to remove duplicates and sort by title alphabetically
       uniqueMoviesArray = _.chain(combinedArrayOfMovies).uniq('Title').sortBy('Title').value();
-      console.log("uniqueMoviesArray after populating", uniqueMoviesArray);
-      $("#userInput").val('');
+      $("#userInput").val(''); //reset user input field
       populateHTML.putSearchInHTML(uniqueMoviesArray);
-      uniqueMoviesArrayCopy = uniqueMoviesArray.slice();
-      // uniqueMoviesArray.length = 0;
-      combinedArrayOfMovies = [];
     });//end search function
 
   //search results filters 
     D.body.on('click', 'button[value="displayWatched"]', function(){
-      filter.displayWatched(uniqueMoviesArrayCopy);
+      filter.displayWatched(uniqueMoviesArray);
     });
     D.body.on('click', 'button[value="displayWished"]', function(){
-      filter.displayWished(uniqueMoviesArrayCopy);
+      filter.displayWished(uniqueMoviesArray);
     });
     D.body.on('click', 'button[value="displayToAdd"]', function(){
-      filter.displayToAdd(uniqueMoviesArrayCopy);
+      filter.displayToAdd(uniqueMoviesArray);
     });
 
   }); // End of Firebase snapshot
   
-  //add movie to database
+  //////////Edit Firebase Database Functions/////////
+  //add movie to database function
   D.moviesDiv.on('click', "#addMovie",function(){
     editMovies.add($(this).siblings().attr('alt'), myFirebaseRef);
   });
