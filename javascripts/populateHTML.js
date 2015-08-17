@@ -1,4 +1,4 @@
-define(["jquery", "hbs"], function($, Handlebars){
+define(["jquery", "hbs", "dom-access"], function($, Handlebars, D){
   var compare = function(a,b) {
       if (a.Title < b.Title)
         return -1;
@@ -11,18 +11,18 @@ define(["jquery", "hbs"], function($, Handlebars){
     putWatchedMoviesInHTML: function(data) {
         console.log("data", data);
         require(['hbs!../templates/moviesWatched'],function(movieTemplate){
-          $("#moviesDiv").html(movieTemplate(data));
+          D.moviesDiv.html(movieTemplate(data));
           $('.myRating').rating();
         });
       },
       putWishListMoviesInHTML: function(data) {
         require(['hbs!../templates/moviesWishList'],function(movieTemplate){
-          $("#moviesDiv").html(movieTemplate(data));
+          D.moviesDiv.html(movieTemplate(data));
         });
       },
       putSearchInHTML: function(data) {
         require(['hbs!../templates/moviesSearch'],function(movieTemplate){
-          $("#moviesDiv").html(movieTemplate(data));
+          D.moviesDiv.html(movieTemplate(data));
           $('.myRating').rating();
         });
       },

@@ -55,10 +55,10 @@ requirejs(
     } else {
       populateHTML.putWatchedMoviesInHTML(sortedMovieArray);  
     }
-    
+
     //autocomplete function
     $("#userInput").autocomplete({
-      source: allMoviesTitles
+      source: search.autocompleteSource(sortedMovieArray)
     });
     
     //////////DOM EVENT HANDLERS//////////
@@ -80,9 +80,6 @@ requirejs(
       console.log("uniqueMoviesArray", uniqueMoviesArray);
       $("#userInput").val('');
       populateHTML.putSearchInHTML(uniqueMoviesArray);
-
-      //consider switching search to incorporate valuesIn, to look at more than the title
-      //console.log("movies array valuesIn", _.valuesIn(sortedMovieArray[0]));
     });//end search function
 
   //search results filters 
