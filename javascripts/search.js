@@ -1,9 +1,21 @@
-define(["jquery", "hbs", "populateHTML"], function($, Handlebars, populateHTML){
+define(["jquery", "hbs", "populateHTML", "lodash"], function($, Handlebars, populateHTML, _){
   return {
     search: function(userInput, data){
       filteredMovies = [];
+      //// Looks just at titles
+      // for(var key in data) {
+      //   if(data[key].Title.toLowerCase().indexOf(userInput.toLowerCase()) > -1){
+      //     filteredMovies[filteredMovies.length] = data[key];
+      //   }
+      // }
+
+
+      //looks at all attributes of the film
       for(var key in data) {
-        if(data[key].Title.toLowerCase().indexOf(userInput.toLowerCase()) > -1){
+        var textLow = [];
+        var textArr = _.valuesIn(data[key]);
+        textLow = textArr.join().toLowerCase();
+        if(textLow.indexOf(userInput.toLowerCase()) > -1){
           filteredMovies[filteredMovies.length] = data[key];
         }
       }
