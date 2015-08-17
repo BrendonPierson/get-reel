@@ -51,11 +51,16 @@ requirejs(
       source: search.autocompleteSource(sortedMovieArray)
     });
     
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    
     //////////DOM EVENT HANDLERS//////////
     //search function takes user input and displays results from firebase and OMDB
     var uniqueMoviesArray = [];
     $('button[type="submit"]').click(function(e){
       e.preventDefault();
+      $("#userInput").autocomplete( "close" );
       var combinedArrayOfMovies=[];
       var userInput = $("#userInput").val();
       find.resetVariables(); //resets all variables in find.js module
