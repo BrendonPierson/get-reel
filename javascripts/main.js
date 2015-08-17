@@ -64,7 +64,6 @@ requirejs(
     //////////DOM EVENT HANDLERS//////////
     //search function
     var uniqueMoviesArrayCopy = [];
-    var uniqueMoviesArray = [];
     $('button[type="submit"]').click(function(e){
       e.preventDefault();
       console.log("uniqueMoviesArray", uniqueMoviesArray);
