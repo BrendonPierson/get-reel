@@ -21,7 +21,7 @@ This webapp allows users to search for movies using the OMDB api.  Users can the
 2. [Bower](http://bower.io/)
 
 ###Installation Instructions
-1. ```git clone https://github.com/BrendonPierson/get-reel.git && cd Movie-History```
+1. ```git clone https://github.com/BrendonPierson/get-reel.git && cd get-reel```
 2. ```npm install``` May take a few minutes to download all dependencies, also runs bower install.
 3. ```npm start``` This fires up the web server 
 
